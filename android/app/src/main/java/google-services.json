@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "960306024162",
+    "project_id": "aytami-1953f",
+    "storage_bucket": "aytami-1953f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960306024162:android:03381fd123be9a22f358bb",
+        "android_client_info": {
+          "package_name": "com.example.aytamy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "960306024162-3chrsg5fm2lh61da0f5fe016gb34q6kt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aytamy",
+            "certificate_hash": "abba1435baabe52eaaa624381e70cac7e1cd555c"
+          }
+        },
+        {
+          "client_id": "960306024162-5ff39lg5clsisokvc2dsksbjo121lpqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtdiD4lXHj9pMCAnpHiBJ_Sb8cpEl-DC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "960306024162-5ff39lg5clsisokvc2dsksbjo121lpqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

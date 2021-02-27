@@ -7,6 +7,7 @@ import 'package:aytamy/common/stats_widgets.dart';
 import 'package:aytamy/common/styles.dart';
 import 'package:aytamy/common/tools.dart';
 import 'package:aytamy/generated/l10n.dart';
+import 'package:aytamy/screens/login/login_screen.dart';
 import 'package:aytamy/screens/signup/registration_info/registration_info.dart';
 import 'package:aytamy/storage/pref_manager.dart';
 import 'package:flutter/cupertino.dart';
@@ -112,7 +113,7 @@ class AppState extends State<App> {
   }
 
   getNextScreen() {
-    return RegistrationInfoStepScreen();
+    return LoginScreen();
     // return HomeScreen();
     // if (PrefManager().getUserToken() != null) {
     //   return HomeScreen();
