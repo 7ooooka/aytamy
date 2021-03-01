@@ -95,7 +95,7 @@ dependencies:
   #  file_picker: ^2.0.12
   #  camera: ^0.5.8+11
   #  path_provider: ^1.6.24
-  gallery_saver: ^2.0.1
+#  gallery_saver: ^2.0.1
   ## nice Log View
   logger: ^0.9.4
   flutter_svg: ^0.19.1
