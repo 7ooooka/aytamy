@@ -124,5 +124,8 @@
   "registrationInfoText":"This is your first time on bail",
   "registrationInfoText2": "Who wipes the head of an orphan\nOnly God did not wipe it, he had every hair\nHasanat passed by his hand",
   "male": "male",
-  "female": "female"
+  "female": "female",
+  "orphanSearch": "Orphan Search",
+  "mostRecent": "Most recent",
+  "beingBailed": "Being bailed"
 }

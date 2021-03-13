@@ -123,6 +123,9 @@
   "registrationInfoText":"هذه مَرَتك الأولى لك في الكفاله",
   "registrationInfoText2": "من مسح رأس يتيم\nلم يمسحه إلا لله كان له بكل شعرة\nمرت عليها يده حسنات",
   "male": "ذكر",
-  "female": "انثي"
+  "female": "انثي",
+  "orphanSearch": "البحت عن يتيم",
+  "mostRecent": "احدث الحالات",
+  "beingBailed": "جاري كفالتهم"
 
 }

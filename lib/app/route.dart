@@ -19,6 +19,7 @@ class Routes {
    static const REGISTRATION_INFO_SCREEN_STEP_ONE = "/registration_info_screen_step_one";
    static const REGISTRATION_INFO_SCREEN_STEP_TWO= "/registration_info_screen_step_two";
   static const REGISTRATION_INFO_SCREEN_FINAL_SCREEN = "/registration_info_final";
+  static const USER_INFO_SCREEN = "/user_info_screen";
 
   // static const SERVICE_FEATURES = "/service_features";
   // static const SUB_SERVICE_FEATURES = "/sub_service_features";

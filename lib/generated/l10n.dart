@@ -1294,6 +1294,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Orphan Search`
+  String get orphanSearch {
+    return Intl.message(
+      'Orphan Search',
+      name: 'orphanSearch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Most recent`
+  String get mostRecent {
+    return Intl.message(
+      'Most recent',
+      name: 'mostRecent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Being bailed`
+  String get beingBailed {
+    return Intl.message(
+      'Being bailed',
+      name: 'beingBailed',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

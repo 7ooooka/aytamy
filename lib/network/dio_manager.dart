@@ -4,7 +4,6 @@ import 'package:aytamy/generated/l10n.dart';
 import 'package:aytamy/storage/pref_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http_parser/http_parser.dart';
 
 class DIOManager {
   static final DIOManager _instance = DIOManager._dio();
@@ -42,7 +41,7 @@ class DIOManager {
   static const String GET_NATIONALITY = "/nationalities";
   static const String GET_CITIES = "/countries";
   static const String GET_REGION = "/region/find-all-by-city-id";
-  static const String SUBMIT_NEW_ADDRESS = "/address/add-new-address";
+  static const String MOST_RECENT_USERS = "/get_new_cases";
 
   sendLoginRequest(
       {Function onSuccess,
@@ -98,31 +97,7 @@ class DIOManager {
     );
   }
 
-  submitNewAddress(
-      {Function onSuccess,
-      Function onError,
-      addressId,
-      title,
-      streetName,
-      apartmentNumber,
-      buildingNumber,
-      floorNumber,
-      regionId,
-      description}) {
-    _sendPostRequest(
-        onSuccess: onSuccess,
-        onError: onError,
-        url: SUBMIT_NEW_ADDRESS,
-        bodyParameters: {
-          "title": title,
-          "streetName": streetName,
-          "apartmentNumber": apartmentNumber,
-          "buildingNumber": buildingNumber,
-          "floorNumber": floorNumber,
-          "regionId": regionId,
-          "description": description,
-        });
-  }
+
 
   getJobs({Function onSuccess, Function onError}) {
     _sendGetRequest(
@@ -140,6 +115,13 @@ class DIOManager {
     );
   }
 
+  getMostRecentUsers({Function onSuccess, Function onError}) {
+    _sendGetRequest(
+      onSuccess: onSuccess,
+      onError: onError,
+      url: MOST_RECENT_USERS,
+    );
+  }
   getNationalities({Function onSuccess, Function onError}) {
     _sendGetRequest(
       onSuccess: onSuccess,
@@ -155,6 +137,9 @@ class DIOManager {
         url: GET_REGION,
         queryParameters: {"city-id": cityId});
   }
+
+
+
 
   updateUserInfo(
       {Map data,
@@ -177,7 +162,6 @@ class DIOManager {
         filename: profileImgName, //add this
       ),
     });
-
 
     // FormData formData = FormData.fromMap({
     //   "type": PrefManager().getUserType() ?? "0",
@@ -329,7 +313,6 @@ class DIOManager {
         response = await _dio.post(
           url,
           data: bodyParameters,
-
         );
       }
 

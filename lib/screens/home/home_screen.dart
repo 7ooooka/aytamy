@@ -61,13 +61,11 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         body: Container(
-          color: Colors.white,
-          child: Container(
-              margin: EdgeInsets.only(top: 2.0),
 
-              alignment: Alignment.center,
+              margin: EdgeInsets.only(top: 2.0),
+              alignment: Alignment.topCenter,
               child: renderMainView()),
-        ));
+        );
   }
 
   Widget renderMainView() {
@@ -87,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
         break;
       default:
         {
-          // return MainCategoryListView();
+          return HomeScreenView();
         }
     }
   }
