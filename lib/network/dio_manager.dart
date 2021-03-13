@@ -4,7 +4,7 @@ import 'package:aytamy/generated/l10n.dart';
 import 'package:aytamy/storage/pref_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-
+import 'package:http_parser/http_parser.dart';
 
 class DIOManager {
   static final DIOManager _instance = DIOManager._dio();
@@ -16,7 +16,7 @@ class DIOManager {
   Dio get _dio {
     final Dio dio = Dio();
 
-    dio.options.baseUrl = "http://34.193.99.151:8080/fix-jed";
+    dio.options.baseUrl = "http://aytamapp.com/public/index.php/api";
     dio.options.headers = {
       "Accept-Language": currentLanguage,
     };
@@ -33,76 +33,31 @@ class DIOManager {
 
   static const ERROR_CODE_UN_REACHABLE = "4";
 
-  static const String _USER_LOGIN = "/auth/login";
+  static const String _USER_LOGIN = "/login";
   static const String _USER_FORGOT_PASSWORD_MAIL = "/auth/reset-password";
-  static const String _USER_SIGN_UP_MAIL = "/auth/register";
-  static const String _GET_MAIN_CATEGORY = "/category/find-all-parents";
-  static const String _GET_SUB_CATEGORY = "/category/find-all-by-parent-id";
-  static const String _GET_PRODUCT = "/product/find-all-by-category-id";
-  static const String _GET_CART_PRODUCT = "/cart/find-all-product-in-cart";
-  static const String _ADD_PRODUCT_TO_CART = "/cart/increase-product-to-cart";
-  static const String _SUBTRACT_PRODUCT_FROM_CART =
-      "/cart/delete-product-from-cart";
-  static const String _REMOVE_PRODUCT_FROM_CART =
-      "/cart/delete-product-from-cart";
-  static const String _REMOVE_CATEGORY_FROM_CART =
-      "/cart/delete-category-from-cart";
-  static const String GET_SAVED_ADDRESS = "/address/find-all-addresses";
-  static const String GET_CITIES = "/city/find-all";
+  static const String _USER_SIGN_UP_MAIL = "/customers";
+  static const String _UPDATE_USER_DATA = "/customers";
+
+  static const String GET_JOBS = "/jobs";
+  static const String GET_NATIONALITY = "/nationalities";
+  static const String GET_CITIES = "/countries";
   static const String GET_REGION = "/region/find-all-by-city-id";
   static const String SUBMIT_NEW_ADDRESS = "/address/add-new-address";
-  static const String EDIT_ADDRESS = "/address/update-by-id";
-  static const String SUBMIT_TRANSACTION = "/transaction/add";
-
-  static const String GET_ALL_SUBMIT_TRANSACTION =
-      "/transaction/find-all-by-status?transaction-status=SUBMITTED";
-  static const String GET_ALL_CONFIRMED_TRANSACTION =
-      "/transaction/find-all-by-status?transaction-status=CONFIRMED";
-  static const String GET_ALL_CANCELED_TRANSACTION =
-      "/transaction/find-all-by-status?transaction-status=CANCELLED";
-  static const String GET_ALL_UPCOMING_TRANSACTION =
-      "/transaction/find-all-by-status?transaction-status=UPCOMING";
-  static const String GET_ALL_DELIVERED_TRANSACTION =
-      "/transaction/find-all-by-status?transaction-status=DELIVERED";
-
-  static const String GET_PROFILE_DATA = "/profile/find-user-data";
-
-  static const String CANCEL_TRANSACTION = "/transaction/cancel";
-
-  static const String GET_NOTIFICATION = "/notification/find-all";
 
   sendLoginRequest(
       {Function onSuccess,
       Function onError,
-      String userName,
+      String email,
       String password}) async {
     var bodyParameter;
 
-    bodyParameter = {
-      "username": userName.toString(),
-      "password": password.trim()
-    };
-    print("Body userName --->" + trimAll(userName) + "--");
-    print("Body password --->" + trimAll(password) + "--");
-    try {
-      Response response = await _dio.post(_USER_LOGIN, data: bodyParameter);
-
-      if (response.statusCode == 200) {
-        logger.e("_sendGetRequest onSuccess----> Of Url $_USER_LOGIN " +
-            response.toString());
-        //
-        // LoginResponse loginResponse = LoginResponse.fromJson(response.data);
-        // loginResponse.token = response.headers.map['authorization'][0];
-        onSuccess(response);
-      } else {
-        logger.e("_sendGetRequest onError----> Of Url $_USER_LOGIN " +
-            response.toString());
-        onError(response);
-      }
-    } on DioError catch (e) {
-      handleDioErrorResponse(_USER_LOGIN, e, onError);
-    }
-    // _sendPostRequest(onSuccess: onSuccess,onError: onError, url: _USER_LOGIN,bodyParameters: bodyParameter);
+    bodyParameter = {"email": email.trim(), "password": password};
+    _sendPostRequest(
+      onSuccess: onSuccess,
+      onError: onError,
+      url: _USER_LOGIN,
+      bodyParameters: bodyParameter,
+    );
   }
 
   sendForgotPasswordMailRequest(
@@ -116,28 +71,23 @@ class DIOManager {
         queryParameters: bodyParameter);
   }
 
-  createUser(
-      {Function onSuccess,
-      Function onError,
-      type,
-      @required String firstName,
-      @required String lastName,
-      @required String password,
-      @required String userName,
-      @required String mail,
-      String phone}) {
+  createUser({
+    Function onSuccess,
+    Function onError,
+    type,
+    @required String password,
+    @required String userName,
+    @required String mail,
+  }) {
     var bodyParameter;
     var url;
 
     url = _USER_SIGN_UP_MAIL;
 
     bodyParameter = {
-      "username": userName,
-      "firstName": firstName,
-      "lastName": lastName,
+      "name": userName,
       "password": password,
-      "confirmPassword": password,
-      "phone": phone,
+      "type": type,
       "email": mail
     };
     _sendPostRequest(
@@ -146,38 +96,6 @@ class DIOManager {
       url: url,
       bodyParameters: bodyParameter,
     );
-  }
-
-  getMainCategory({Function onSuccess, Function onError}) {
-    _sendGetRequest(
-        onSuccess: onSuccess,
-        onError: onError,
-        url: _GET_MAIN_CATEGORY,
-        queryParameters: null);
-  }
-
-  getServiceProduct({Function onSuccess, Function onError, serviceId}) {
-    _sendGetRequest(
-        onSuccess: onSuccess,
-        onError: onError,
-        url: _GET_PRODUCT,
-        queryParameters: {"category-id": serviceId});
-  }
-
-  getSubCategory({Function onSuccess, Function onError, categoryId}) {
-    _sendGetRequest(
-        onSuccess: onSuccess,
-        onError: onError,
-        url: _GET_SUB_CATEGORY,
-        queryParameters: {"parent-id": categoryId});
-  }
-
-  addProductToCart({Function onSuccess, Function onError, productId}) {
-    _sendPostRequest(
-        onSuccess: onSuccess,
-        onError: onError,
-        url: _ADD_PRODUCT_TO_CART,
-        queryParameters: {"product-id": productId});
   }
 
   submitNewAddress(
@@ -206,70 +124,11 @@ class DIOManager {
         });
   }
 
-  editAddress(
-      {Function onSuccess,
-      Function onError,
-      addressId,
-      title,
-      streetName,
-      apartmentNumber,
-      buildingNumber,
-      floorNumber,
-      regionId,
-      description}) {
-    _sendPutRequest(
-        onSuccess: onSuccess,
-        onError: onError,
-        url: EDIT_ADDRESS,
-        bodyParameters: {
-          "id": addressId,
-          "title": title,
-          "streetName": streetName,
-          "apartmentNumber": apartmentNumber,
-          "buildingNumber": buildingNumber,
-          "floorNumber": floorNumber,
-          "regionId": regionId,
-          "description": description,
-        });
-  }
-
-  subtractProductFromCart({Function onSuccess, Function onError, productId}) {
-    _sendDeleteRequest(
-        onSuccess: onSuccess,
-        onError: onError,
-        url: _SUBTRACT_PRODUCT_FROM_CART,
-        queryParameters: {"product-id": productId});
-  }
-
-  removeProductFromCart({Function onSuccess, Function onError, productId}) {
-    _sendDeleteRequest(
-        onSuccess: onSuccess,
-        onError: onError,
-        url: _REMOVE_PRODUCT_FROM_CART,
-        queryParameters: {"product-id": productId});
-  }
-
-  removeCategoryFromCart({Function onSuccess, Function onError, productId}) {
-    _sendDeleteRequest(
-        onSuccess: onSuccess,
-        onError: onError,
-        url: _REMOVE_CATEGORY_FROM_CART,
-        queryParameters: {"category-id": productId});
-  }
-
-  getCartProducts({Function onSuccess, Function onError}) {
+  getJobs({Function onSuccess, Function onError}) {
     _sendGetRequest(
       onSuccess: onSuccess,
       onError: onError,
-      url: _GET_CART_PRODUCT,
-    );
-  }
-
-  getSavedAddress({Function onSuccess, Function onError}) {
-    _sendGetRequest(
-      onSuccess: onSuccess,
-      onError: onError,
-      url: GET_SAVED_ADDRESS,
+      url: GET_JOBS,
     );
   }
 
@@ -281,6 +140,14 @@ class DIOManager {
     );
   }
 
+  getNationalities({Function onSuccess, Function onError}) {
+    _sendGetRequest(
+      onSuccess: onSuccess,
+      onError: onError,
+      url: GET_NATIONALITY,
+    );
+  }
+
   getCitiesRegion({Function onSuccess, Function onError, cityId}) {
     _sendGetRequest(
         onSuccess: onSuccess,
@@ -289,40 +156,44 @@ class DIOManager {
         queryParameters: {"city-id": cityId});
   }
 
+  updateUserInfo(
+      {Map data,
+      uid,
+      type,
+      dateBirth,
+      countryId,
+      jobId,
+      nationalityId,
+      profileImgPath,
+      profileImgName,
+      Function onSuccess,
+      Function onError}) async {
+    MultipartFile file =
+        await MultipartFile.fromFile(profileImgPath, filename: profileImgName);
 
-  cancelTransaction({Function onSuccess, Function onError, transactionId}) {
-    _sendPutRequest(
+    FormData formData = FormData.fromMap({
+      "image": await MultipartFile.fromFile(
+        profileImgPath,
+        filename: profileImgName, //add this
+      ),
+    });
+
+
+    // FormData formData = FormData.fromMap({
+    //   "type": PrefManager().getUserType() ?? "0",
+    //   "date_birth": dateBirth,
+    //   "country_id": countryId,
+    //   "job_id": jobId,
+    //   "nationality_id": nationalityId,
+    //   "image": file
+    // });
+    _sendFormDataRequest(
       onSuccess: onSuccess,
       onError: onError,
-      queryParameters: {"transaction-id": transactionId},
-      url: CANCEL_TRANSACTION,
-    );
-  }
-
-  getProfileData({Function onSuccess, Function onError}) {
-    _sendGetRequest(
-      onSuccess: onSuccess,
-      onError: onError,
-      url: GET_PROFILE_DATA,
-    );
-  }
-
-  getNotification({Function onSuccess, Function onError}) {
-    _sendGetRequest(
-      onSuccess: onSuccess,
-      onError: onError,
-      url: GET_NOTIFICATION,
-    );
-  }
-
-  submitTransaction(
-      {addressId, paymentId, Function onSuccess, Function onError}) {
-    // addressId = int.parse(addressId);
-    _sendPostRequest(
-      onSuccess: onSuccess,
-      onError: onError,
-      bodyParameters: {"paymentId": paymentId, "addressId": addressId},
-      url: SUBMIT_TRANSACTION,
+      bodyParameters: formData,
+      filePath: profileImgPath,
+      fileName: profileImgName,
+      url: _UPDATE_USER_DATA + "/$uid",
     );
   }
 
@@ -430,6 +301,56 @@ class DIOManager {
     }
   }
 
+  _sendFormDataRequest(
+      {Function onSuccess(data),
+      Function onError(data),
+      String url,
+      String filePath,
+      String fileName,
+      queryParameters,
+      FormData bodyParameters}) async {
+    print("_sendFormDataRequest ----> " + bodyParameters.fields.toString());
+    print("_sendFormDataRequest Files----> " + bodyParameters.files.toString());
+    try {
+      Response response;
+      if (queryParameters != null && bodyParameters == null) {
+        print("_sendFormDataRequest onSuccess called [1]");
+
+        response = await _dio.post(url,
+            queryParameters: queryParameters, data: bodyParameters);
+      } else if (queryParameters != null && bodyParameters != null) {
+        print("_sendFormDataRequest onSuccess called [2]");
+
+        response = await _dio.post(url,
+            data: bodyParameters, queryParameters: queryParameters);
+      } else {
+        print("_sendFormDataRequest onSuccess called [3]");
+
+        response = await _dio.post(
+          url,
+          data: bodyParameters,
+
+        );
+      }
+
+      if (response.statusCode == 200) {
+        logger.e("_sendPostRequest onSuccess----> Of Url $url " +
+            response.toString());
+        if (response.data != null) {
+          onSuccess(response.data);
+        } else {
+          onSuccess("Success");
+        }
+      } else {
+        logger.e(
+            "_sendPostRequest onError----> Of Url $url " + response.toString());
+        onError(response);
+      }
+    } on DioError catch (e) {
+      handleDioErrorResponse(url, e, onError);
+    }
+  }
+
   _sendPutRequest(
       {Function onSuccess(data),
       Function onError(data),
@@ -490,9 +411,11 @@ class DIOManager {
           onError(S.current.noResultFound);
         }
       } else {
+        print("NetworkError ---> " + e?.response.toString());
         onError(e?.response ?? "UnExpected Error");
       }
     } catch (e) {
+      print("NetworkError ---> " + e?.response.toString());
       onError("[3] Un Expected Error");
     }
   }

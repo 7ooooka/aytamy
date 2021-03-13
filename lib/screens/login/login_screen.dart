@@ -1,6 +1,9 @@
+import 'package:aytamy/app/route.dart';
 import 'package:aytamy/common/colors.dart';
+import 'package:aytamy/common/stats_widgets.dart';
 import 'package:aytamy/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -11,6 +14,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _userNameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   Widget build(BuildContext context) {
     print("IntroScreen ---> Build()");
     return Scaffold(
@@ -46,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(color: Colors.red, width: 1.7)),
                         child: TextFormField(
+                          controller: _userNameController,
                           autovalidateMode: AutovalidateMode.always,
                           style: TextStyle(
                               color: const Color(0xffdb0011),
@@ -63,15 +70,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             // hintText: 'What do people call you?',
                             labelText: S.current.userName,
                           ),
-                          onSaved: (String value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
-                          validator: (String value) {
-                            return value.contains('@')
-                                ? 'Do not use the @ char.'
-                                : null;
-                          },
                         )),
                     SizedBox(
                       height: 22,
@@ -83,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(color: Colors.red, width: 1.7)),
                         child: TextFormField(
+                          controller: _passwordController,
                           autovalidateMode: AutovalidateMode.always,
                           style: TextStyle(
                               color: const Color(0xffdb0011),
@@ -100,50 +99,49 @@ class _LoginScreenState extends State<LoginScreen> {
                             // hintText: 'What do people call you?',
                             labelText: S.of(context).password,
                           ),
-                          onSaved: (String value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
-                          validator: (String value) {
-                            return value.contains('@')
-                                ? 'Do not use the @ char.'
-                                : null;
-                          },
                         )),
 
                     SizedBox(
                       height: 22,
                     ),
                     // Rectangle
-                    Container(
-                      width: MediaQuery.of(context).size.width * .80,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: const Color(0xffdb0011)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 22,
-                          ),
-                          Text(S.current.enter,
-                              style: const TextStyle(
-                                  color: const Color(0xffffffff),
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "GESSTwoBold",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 21.0),
-                              textAlign: TextAlign.left),
-                          Container(
-                            margin: EdgeInsets.only(left: 18),
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.white,
+                    InkWell(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * .80,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: const Color(0xffdb0011)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 22,
                             ),
-                          ),
-                        ],
+                            Text(S.current.enter,
+                                style: const TextStyle(
+                                    color: const Color(0xffffffff),
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "GESSTwoBold",
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 21.0),
+                                textAlign: TextAlign.left),
+                            Container(
+                              margin: EdgeInsets.only(left: 18),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
+                      onTap: () {
+                        if (validateForm()) {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              Routes.HOME, (route) => false);
+                        }
+                      },
                     ),
                     SizedBox(
                       height: 22,
@@ -162,7 +160,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             width: 22,
                           ),
-
                           Text(S.current.signUpFaceBook,
                               style: const TextStyle(
                                   color: const Color(0xff0078d7),
@@ -236,7 +233,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontFamily: "GESSTwoBold",
                                 fontStyle: FontStyle.normal,
                                 fontSize: 16.0),
-                            text: S.current.joinUs + " "),
+                            text: S.current.joinUs + " ",
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.of(context).pushNamed(Routes.SIGN_UP);
+                              }),
                         TextSpan(
                             style: const TextStyle(
                                 color: const Color(0xff4f4f4f),
@@ -277,5 +278,17 @@ class _LoginScreenState extends State<LoginScreen> {
             )),
       ),
     );
+  }
+
+  bool validateForm() {
+    if (_userNameController.value.text.isEmpty) {
+      showError(S.current.invalidUserName);
+      return false;
+    } else if (_passwordController.value.text.isEmpty &&
+        _passwordController.value.text.length < 6) {
+      showError(S.current.invalidPassword);
+      return false;
+    }
+    return true;
   }
 }

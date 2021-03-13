@@ -111,5 +111,18 @@
   "enter": "Enter",
   "register": "Register",
   "myInfo": "My Info",
-  "continueText": "continue"
+  "continueText": "continue",
+  "birthDate": "Birth date",
+  "job": "Job",
+  "nationality": "Nationality",
+  "city": "City",
+  "latestTransaction": "Latest transaction",
+  "myPriority": "My priority",
+  "NewOrphan": "New Orphan",
+  "need_support": "Need support",
+  "registration_info_step_one": "Do you own an institution for orphans ?",
+  "registrationInfoText":"This is your first time on bail",
+  "registrationInfoText2": "Who wipes the head of an orphan\nOnly God did not wipe it, he had every hair\nHasanat passed by his hand",
+  "male": "male",
+  "female": "female"
 }

@@ -3,14 +3,16 @@ import 'package:aytamy/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RegistrationInfoStepScreen extends StatefulWidget {
+class RegistrationInfoStepOneScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return _RegistrationInfo();
   }
 }
 
-class _RegistrationInfo extends State<RegistrationInfoStepScreen> {
+class _RegistrationInfo extends State<RegistrationInfoStepOneScreen> {
+  CurrentSelectedOption _currentSelectedOption;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,15 +24,14 @@ class _RegistrationInfo extends State<RegistrationInfoStepScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
-        title: // كلمة المرور
-            Text(S.current.myInfo,
-                style: const TextStyle(
-                    color: const Color(0xffffffff),
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "GESSTwoBold",
-                    fontStyle: FontStyle.normal,
-                    fontSize: 18.0),
-                textAlign: TextAlign.center),
+        title: Text(S.current.myInfo,
+            style: const TextStyle(
+                color: const Color(0xffffffff),
+                fontWeight: FontWeight.w700,
+                fontFamily: "GESSTwoBold",
+                fontStyle: FontStyle.normal,
+                fontSize: 18.0),
+            textAlign: TextAlign.center),
       ),
       body: Column(
         children: [
@@ -51,7 +52,7 @@ class _RegistrationInfo extends State<RegistrationInfoStepScreen> {
           ),
 
           //////////////////////
-          Text("هذه مَرَتك الأولى لك في الكفاله",
+          Text(S.current.registrationInfoText,
               style: const TextStyle(
                   color: const Color(0xffdb0011),
                   fontWeight: FontWeight.w800,
@@ -63,40 +64,64 @@ class _RegistrationInfo extends State<RegistrationInfoStepScreen> {
             height: 40,
           ),
           // Rectangle
-          Container(
-            width: MediaQuery.of(context).size.width * .75,
-            height: 45,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: const Color(0xffbdbdbd), width: 1)),
-            child: Text(S.current.no,
-                style: const TextStyle(
-                    color: const Color(0xffbdbdbd),
-                    fontWeight: FontWeight.w800,
-                    fontFamily: "GESSTwoBold",
-                    fontStyle: FontStyle.normal,
-                    fontSize: 18.0),
-                textAlign: TextAlign.center),
+          GestureDetector(
+            child: Container(
+              width: MediaQuery.of(context).size.width * .75,
+              height: 45,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(
+                      color: (_currentSelectedOption ==
+                              CurrentSelectedOption.OPTION_ONE)
+                          ? Color(0xffdb0011)
+                          : Color(0xffbdbdbd),
+                      width: 2)),
+              child: Text(S.current.no,
+                  style: const TextStyle(
+                      color: const Color(0xffbdbdbd),
+                      fontWeight: FontWeight.w800,
+                      fontFamily: "GESSTwoBold",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 18.0),
+                  textAlign: TextAlign.center),
+            ),
+            onTap: () {
+              setState(() {
+                _currentSelectedOption = CurrentSelectedOption.OPTION_ONE;
+              });
+            },
           ),
           SizedBox(
             height: 14,
           ),
-          Container(
-            width: MediaQuery.of(context).size.width * .75,
-            height: 45,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: const Color(0xffbdbdbd), width: 1)),
-            child: Text(S.current.yes,
-                style: const TextStyle(
-                    color: const Color(0xffbdbdbd),
-                    fontWeight: FontWeight.w800,
-                    fontFamily: "GESSTwoBold",
-                    fontStyle: FontStyle.normal,
-                    fontSize: 18.0),
-                textAlign: TextAlign.center),
+          GestureDetector(
+            child: Container(
+              width: MediaQuery.of(context).size.width * .75,
+              height: 45,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(
+                      color: (_currentSelectedOption ==
+                              CurrentSelectedOption.OPTION_TWO)
+                          ? Color(0xffdb0011)
+                          : Color(0xffbdbdbd),
+                      width: 2)),
+              child: Text(S.current.yes,
+                  style: const TextStyle(
+                      color: Color(0xffbdbdbd),
+                      fontWeight: FontWeight.w800,
+                      fontFamily: "GESSTwoBold",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 18.0),
+                  textAlign: TextAlign.center),
+            ),
+            onTap: () {
+              setState(() {
+                _currentSelectedOption = CurrentSelectedOption.OPTION_TWO;
+              });
+            },
           ),
           SizedBox(
             height: 16,
@@ -106,7 +131,7 @@ class _RegistrationInfo extends State<RegistrationInfoStepScreen> {
             height: 50,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: const Color(0xffdb0011),
+              color: Color(0xffdb0011),
             ),
 
 //////////////////////
@@ -151,7 +176,7 @@ class _RegistrationInfo extends State<RegistrationInfoStepScreen> {
                           fontFamily: "GESSTwoBold",
                           fontStyle: FontStyle.normal,
                           fontSize: 16.0),
-                      text: S.current.joinUs + " "),
+                      text: S.current.need_support + " "),
                   TextSpan(
                       style: const TextStyle(
                           color: const Color(0xff4f4f4f),
@@ -159,7 +184,7 @@ class _RegistrationInfo extends State<RegistrationInfoStepScreen> {
                           fontFamily: "GESSTwoBold",
                           fontStyle: FontStyle.normal,
                           fontSize: 18.0),
-                      text: S.current.doNotHaveAccount),
+                      text: S.current.registration_info_step_one),
                 ])),
               ],
             ),
@@ -169,3 +194,5 @@ class _RegistrationInfo extends State<RegistrationInfoStepScreen> {
     );
   }
 }
+
+enum CurrentSelectedOption { OPTION_ONE, OPTION_TWO }

@@ -1,7 +1,9 @@
 import 'package:aytamy/screens/home/home_screen.dart';
 import 'package:aytamy/screens/intro/intro_screen.dart';
 import 'package:aytamy/screens/login/login_screen.dart';
-import 'package:aytamy/screens/signup/registration_info/registration_info.dart';
+import 'package:aytamy/screens/signup/registration_info/registration_info_screen_final.dart';
+import 'package:aytamy/screens/signup/registration_info/registration_info_step_one_screen.dart';
+import 'package:aytamy/screens/signup/registration_info/registration_info_screen_step_two.dart';
 import 'package:aytamy/screens/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +16,9 @@ class Routes {
   static const LOGIN = "/loginScreen";
   // static const FORGOT_PASSWORD = "/forgot_password";
   static const HOME = "/home_screen";
-  static const SIGN_UP_STEP_ONE = "/sign_up_step_one";
+   static const REGISTRATION_INFO_SCREEN_STEP_ONE = "/registration_info_screen_step_one";
+   static const REGISTRATION_INFO_SCREEN_STEP_TWO= "/registration_info_screen_step_two";
+  static const REGISTRATION_INFO_SCREEN_FINAL_SCREEN = "/registration_info_final";
 
   // static const SERVICE_FEATURES = "/service_features";
   // static const SUB_SERVICE_FEATURES = "/sub_service_features";
@@ -30,9 +34,11 @@ class Routes {
     INTO_SCREEN: (context) => IntroScreen(),
     LOGIN: (context) => LoginScreen(),
     SIGN_UP: (context) => SignUpScreen(),
-    SIGN_UP_STEP_ONE: (context) => RegistrationInfoStepScreen(),
+    REGISTRATION_INFO_SCREEN_STEP_ONE: (context) => RegistrationInfoStepOneScreen(),
+    REGISTRATION_INFO_SCREEN_STEP_TWO: (context) => RegistrationInfoStepTwoScreen(),
+    REGISTRATION_INFO_SCREEN_FINAL_SCREEN: (context) => RegistrationInfoFinalScreen(),
     HOME: (context) => HomeScreen(),
-    // SIGN_UP: (context) => SignUpScreen(),
+
     // SIGN_UP_SUCCESS: (context) => SignUpSuccessScreen(),
     // FORGOT_PASSWORD: (context) => ForgotPasswordScreen(),
     // LOGIN: (context) => LoginScreen(),

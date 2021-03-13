@@ -110,5 +110,19 @@
   "enter":"دخول",
   "register": "تسجيل",
   "myInfo": "بياناتي",
-  "continueText": "متابعه"
+  "continueText": "متابعه",
+  "birthDate": "تاريخ الميلاد",
+   "job": "الوظيفه",
+  "nationality": "الجنسيه",
+  "city": "المدينه",
+  "latestTransaction": "اخر تحويلات",
+  "myPriority": "اولوياتي",
+  "NewOrphan": "يتيم جديد",
+  "need_support": "تحتاج لدعم",
+  "registration_info_step_one": "هل تمتلك مؤسسة للايتام ؟",
+  "registrationInfoText":"هذه مَرَتك الأولى لك في الكفاله",
+  "registrationInfoText2": "من مسح رأس يتيم\nلم يمسحه إلا لله كان له بكل شعرة\nمرت عليها يده حسنات",
+  "male": "ذكر",
+  "female": "انثي"
+
 }

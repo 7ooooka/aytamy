@@ -1164,6 +1164,136 @@ class S {
       args: [],
     );
   }
+
+  /// `Birth date`
+  String get birthDate {
+    return Intl.message(
+      'Birth date',
+      name: 'birthDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Job`
+  String get job {
+    return Intl.message(
+      'Job',
+      name: 'job',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nationality`
+  String get nationality {
+    return Intl.message(
+      'Nationality',
+      name: 'nationality',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get city {
+    return Intl.message(
+      'City',
+      name: 'city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Latest transaction`
+  String get latestTransaction {
+    return Intl.message(
+      'Latest transaction',
+      name: 'latestTransaction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My priority`
+  String get myPriority {
+    return Intl.message(
+      'My priority',
+      name: 'myPriority',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Orphan`
+  String get NewOrphan {
+    return Intl.message(
+      'New Orphan',
+      name: 'NewOrphan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Need support`
+  String get need_support {
+    return Intl.message(
+      'Need support',
+      name: 'need_support',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you own an institution for orphans ?`
+  String get registration_info_step_one {
+    return Intl.message(
+      'Do you own an institution for orphans ?',
+      name: 'registration_info_step_one',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This is your first time on bail`
+  String get registrationInfoText {
+    return Intl.message(
+      'This is your first time on bail',
+      name: 'registrationInfoText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Who wipes the head of an orphan\nOnly God did not wipe it, he had every hair\nHasanat passed by his hand`
+  String get registrationInfoText2 {
+    return Intl.message(
+      'Who wipes the head of an orphan\nOnly God did not wipe it, he had every hair\nHasanat passed by his hand',
+      name: 'registrationInfoText2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `male`
+  String get male {
+    return Intl.message(
+      'male',
+      name: 'male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `female`
+  String get female {
+    return Intl.message(
+      'female',
+      name: 'female',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
