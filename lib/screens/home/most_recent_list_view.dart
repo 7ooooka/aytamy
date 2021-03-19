@@ -43,6 +43,7 @@ class _MostRecentListViewState extends State<MostRecentListView> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
+              color: Colors.red,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,7 +76,7 @@ class _MostRecentListViewState extends State<MostRecentListView> {
     }
     return PagedGridView(
       pagingController: _pagingController,
-
+      scrollDirection: Axis.vertical,
       builderDelegate: PagedChildBuilderDelegate<User>(
         itemBuilder: (context, user, index) {
           return CaseItemView();
@@ -88,7 +89,7 @@ class _MostRecentListViewState extends State<MostRecentListView> {
       ),
       padding: const EdgeInsets.all(12),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+        crossAxisCount: 1,
         childAspectRatio: 2,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,

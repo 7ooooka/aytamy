@@ -90,7 +90,8 @@ class HomeScreenViewState extends State with SingleTickerProviderStateMixin {
 
   getMainView() {
     return Container(
-      height: MediaQuery.of(context).size.height * .5,
+      height: MediaQuery.of(context).size.height,
+      color: Colors.amber,
       child: Column(
         children: [
           getSearchView(),
@@ -123,7 +124,8 @@ class HomeScreenViewState extends State with SingleTickerProviderStateMixin {
                 border:
                     Border(bottom: BorderSide(color: Colors.grey, width: 0.8))),
           ),
-          Expanded(
+          Container(
+            height: 250,
             child: ChangeNotifierProvider.value(
                 value: _homeModel,
                 child: TabBarView(
