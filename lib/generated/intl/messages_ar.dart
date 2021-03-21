@@ -144,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "total" : MessageLookupByLibrary.simpleMessage("اجمالي"),
     "transactionSubmitted" : MessageLookupByLibrary.simpleMessage("لقد تم ارسال طلبك !"),
     "transactionSubmittedDesc" : MessageLookupByLibrary.simpleMessage("ستتلقي مكالمه من احد ممثلينا لتآكيد موعدك\n يمكنك الان تتبع تقدم طلبك من "),
+    "treatementBank" : MessageLookupByLibrary.simpleMessage("جاري كفالتهم"),
     "tryAgain" : MessageLookupByLibrary.simpleMessage("آعاده المحاوله"),
     "userName" : MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
     "yes" : MessageLookupByLibrary.simpleMessage("نعم"),

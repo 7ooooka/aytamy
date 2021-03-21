@@ -10,19 +10,118 @@ import 'package:aytamy/storage/pref_manager.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class RegistrationModel {
-  signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+import '../../../app/app_model.dart';
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-    await googleUser.authentication;
+class RegistrationModel {
+  final _app = AppModel();
+  GoogleSignIn googleSignIn = new GoogleSignIn();
+
+  signInWithGoogle({onSucces, onError}) async {
+    googleSignIn.signOut();
+    var userData;
+    bool isSigned;
+    String accessToken;
+    try {
+      isSigned = await googleSignIn.isSignedIn();
+
+      /*     if (isSigned) {
+         GoogleSignInAccount googleUser =await  googleSignIn.currentUser;
+        print("Goolgle request ----> is Logged:::: ${(googleUser.displayName.toString())}");
+        // now you can call to  FacebookAuth.instance.getUserData();
+         final GoogleSignInAuthentication googleAuth =
+         await googleUser.authentication;
+         accessToken =  googleAuth.accessToken;
+         onSucces();
+      } else {*/
+      GoogleSignInAccount googleUser = await googleSignIn.signIn();
+      print(
+          "Goolgle request ----> is Logged:::: ${(googleUser.displayName.toString())}");
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      accessToken = googleAuth.accessToken;
+      _app.setUserId(googleUser.id);
+      _app.setUserName(googleUser.displayName);
+      _app.setUserToken(accessToken);
+      _app.setUserMail(googleUser.email);
+      _app.setUserProfileImage(googleUser.photoUrl);
+      onSucces();
+      // }
+    } catch (e) {
+      print("erroror" + e.toString());
+      onError(e.toString()); // print the error message in console
+    }
   }
 
-  signInWithFacebook() async {
-    // Trigger the sign-in flow
-    var result = await FacebookAuth.instance.login();
+  // signInWithFacebook() async {
+  //   // Trigger the sign-in flow
+  //   var result = await FacebookAuth.instance.login();
+  // }
+
+  signInWithFacebook({onSucces, onError}) async {
+    var userData;
+    AccessToken accessToken;
+    try {
+      accessToken = await FacebookAuth.instance.isLogged;
+
+      if (accessToken != null) {
+        print("FaceBook request ----> is Logged:::: ${(accessToken.toJson())}");
+        // now you can call to  FacebookAuth.instance.getUserData();
+        Map<String, dynamic> userData =
+            await FacebookAuth.instance.getUserData();
+        accessToken = accessToken;
+        signUpSocialUser(
+            social_type: "facebook",
+            social_token: accessToken.token,
+            social_id: userData['id'],
+            userName: userData['name'],
+            email: userData['email'],
+            imageUrl: userData['picture']['data']['url'].toString(),
+            onSuccess: onSucces,
+            onError: (error) {
+              onError(error.toString());
+              print("signUpUser onError ---->" + error.toString());
+            });
+        // _saveSocialUserData(userData['id'], accessToken.token, userData['picture']['data']['url'].toString(), userData['email'], userData['name']);
+        // onSucces(userData['picture']['data']['url'].toString());
+      } else {
+        accessToken = await FacebookAuth.instance.login();
+        print("FaceBook request ----> is Logged:::: ${(accessToken.toJson())}");
+        Map<String, dynamic> userData =
+            await FacebookAuth.instance.getUserData();
+        signUpSocialUser(
+            social_type: "facebook",
+            social_token: accessToken.token,
+            social_id: userData['id'],
+            userName: userData['name'],
+            email: userData['email'],
+            imageUrl: userData['picture']['data']['url'].toString(),
+            onSuccess: onSucces,
+            onError: (error) {
+              onError(error.toString());
+              print("signUpUser onError ---->" + error.toString());
+            });
+        // _saveSocialUserData(userData['id'], accessToken.token, userData['picture']['data']['url'].toString(), userData['email'], userData['name']);
+        // onSucces(userData['picture']['data']['url'].toString());
+      }
+    } on FacebookAuthException catch (e) {
+      // if the facebook login fails
+      // check the error type
+      switch (e.errorCode) {
+        case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
+          print("You have a previous login operation in progress");
+          break;
+        case FacebookAuthErrorCode.CANCELLED:
+          print("login cancelled");
+          break;
+        case FacebookAuthErrorCode.FAILED:
+          print("login failed");
+          break;
+      }
+    } catch (e) {
+      onError(e.toString());
+    } finally {
+      // update the view
+    }
   }
 
   signUpUser({String userName, email, password, onSuccess, onError}) {
@@ -35,12 +134,43 @@ class RegistrationModel {
         onSuccess: (response) {
           print("signUpUser onSuccess ---->" + response.toString());
           SignUpResponse signUpResponse = SignUpResponse.fromJson(response);
-          // _saveUserData(signUpResponse.data);
+          _saveUserData(signUpResponse.data);
           onSuccess();
         },
         onError: (error) {
           onError(error.toString());
           print("signUpUser onError ---->" + error.toString());
+        });
+  }
+
+  signUpSocialUser(
+      {String userName,
+      email,
+      social_type,
+      social_token,
+      social_id,
+      imageUrl,
+      onSuccess,
+      onError}) {
+    print("userName: $userName + email : $email + social_type : $social_type");
+    DIOManager().createSocialUser(
+        userName: userName,
+        mail: email,
+        social_id: social_id,
+        social_token: social_token,
+        social_type: social_type,
+        type: "0",
+        imageUrl: imageUrl,
+        onSuccess: (response) {
+          print("signUpSocialUser onSuccess ---->" + response.toString());
+          SignUpResponse signUpResponse = SignUpResponse.fromJson(response);
+          _saveUserData(signUpResponse.data);
+          _saveSocialUserData(social_token, imageUrl);
+          onSuccess();
+        },
+        onError: (error) {
+          onError(error.toString());
+          print("signUpSocialUser onError ---->" + error.toString());
         });
   }
 
@@ -87,7 +217,7 @@ class RegistrationModel {
     DIOManager().getCities(onSuccess: (response) {
       print("getNationalities onSuccess ---->" + response.toString());
       NationalityResponse nationalityResponse =
-      NationalityResponse.fromJson(response);
+          NationalityResponse.fromJson(response);
       onSuccess(nationalityResponse.data);
     }, onError: (error) {
       onError(error.toString());
@@ -95,47 +225,66 @@ class RegistrationModel {
     });
   }
 
-  updateUserData({File profileImagePath,
-    birthDate,
-    jobId,
-    nationalityId,
-    countryID,
-    onSuccess,
-    onError}) {
-    Map data = {
-      "type": PrefManager().getUserType() ?? "0",
-      "date_birth": birthDate ?? PrefManager().getBirthDate(),
-      "country_id": countryID ?? PrefManager().getCountryID(),
-      "job_id": jobId ?? PrefManager().getJobID(),
-      "nationality_id": nationalityId ?? PrefManager().getNationalID()
-    };
+  updateUserGender({String gender, onSuccess, onError}) {
+    DIOManager().updateUsergender(
+        gender: gender,
+        onSuccess: (response) {
+          SignUpResponse signUpResponse = SignUpResponse.fromJson(response);
+          _saveUserData(signUpResponse.data);
+          onSuccess();
+        },
+        onError: (error) {
+          onError(error.toString());
+          print("updateUserData onError ---->" + error.toString());
+        },
+        uid: int.parse(PrefManager().getUserId()) ?? 7);
+  }
+
+  updateUserData(
+      {File profileImagePath,
+      birthDate,
+      jobId,
+      nationalityId,
+      countryID,
+      onSuccess,
+      onError}) {
+    // Map data = {
+    //   "type": PrefManager().getUserType() ?? "0",
+    //   "date_birth": birthDate ?? PrefManager().getBirthDate(),
+    //   "country_id": countryID ?? PrefManager().getCountryID(),
+    //   "job_id": jobId ?? PrefManager().getJobID(),
+    //   "nationality_id": nationalityId ?? PrefManager().getNationalID()
+    // };
 
     var path = profileImagePath.path.toString();
-    var name = profileImagePath.path
-        .split('/')
-        .last;
+    var name = profileImagePath.path.split('/').last;
 
     DIOManager().updateUserInfo(
-        uid: PrefManager().getUserId() ?? "7",
+        uid: int.parse(PrefManager().getUserId()) ?? 7,
         profileImgPath: path,
         profileImgName: name,
-        type: PrefManager().getUserType() ?? "0",
-        dateBirth: birthDate ?? PrefManager().getBirthDate(),
-        countryId: countryID ?? PrefManager().getCountryID(),
-        jobId: jobId ?? PrefManager().getJobID(),
-        nationalityId: nationalityId ?? PrefManager().getNationalID(),
-        onSuccess: (response)
-    {
-      SignUpResponse signUpResponse = SignUpResponse.fromJson(response);
-      _saveUserData(signUpResponse.data);
+        type: 0,
+        dateBirth: birthDate ?? int.parse(PrefManager().getBirthDate()),
+        countryId: countryID ?? int.parse(PrefManager().getCountryID()),
+        jobId: jobId ?? int.parse(PrefManager().getJobID()),
+        nationalityId:
+            nationalityId ?? int.parse(PrefManager().getNationalID()),
+        onSuccess: (response) {
+          SignUpResponse signUpResponse = SignUpResponse.fromJson(response);
+          _saveUserData(signUpResponse.data);
 
-      print("updateUserData onSuccess ---->" + response.toString());
-      onSuccess();
-    },
-    onError: (error) {
-    onError(error.toString());
-    print("updateUserData onError ---->" + error.toString());
-    });
+          print("updateUserData onSuccess ---->" + response.toString());
+          onSuccess();
+        },
+        onError: (error) {
+          onError(error.toString());
+          print("updateUserData onError ---->" + error.toString());
+        });
+  }
+
+  _saveSocialUserData(String social_token, String image) {
+    _app.setUserToken(social_token);
+    _app.setUserProfileImage(image);
   }
 
   _saveUserData(User user) {

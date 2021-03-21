@@ -1324,6 +1324,16 @@ class S {
       args: [],
     );
   }
+
+  /// `To be more careful about the orphans orphan we seek, through the application of orphans, to provide packages and medicines for orphans registered with us through the treatment bank.\n  The treatment bank is one of the orphans banks where we receive donations and based on the treatment lists for orphans, the packages are sent to our orphans directly through our agents in all countries where the inclusion of their orphans is available, and the verified ones are carried out by social workers tasked with verifying cases of orphans`
+  String get treatementBank {
+    return Intl.message(
+      'To be more careful about the orphans orphan we seek, through the application of orphans, to provide packages and medicines for orphans registered with us through the treatment bank.\n  The treatment bank is one of the orphans banks where we receive donations and based on the treatment lists for orphans, the packages are sent to our orphans directly through our agents in all countries where the inclusion of their orphans is available, and the verified ones are carried out by social workers tasked with verifying cases of orphans',
+      name: 'treatementBank',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -8,6 +8,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../common/stats_widgets.dart';
+import '../../../common/stats_widgets.dart';
+
 class RegistrationInfoStepTwoScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -18,7 +21,8 @@ class RegistrationInfoStepTwoScreen extends StatefulWidget {
 class _RegistrationInfoStepTwoState
     extends State<RegistrationInfoStepTwoScreen> {
   CurrentSelectedOption _currentSelectedOption;
-  RegistrationModel _registrationModel= RegistrationModel();
+  RegistrationModel _registrationModel = RegistrationModel();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,15 +47,9 @@ class _RegistrationInfoStepTwoState
         child: Column(
           children: [
             Image.asset(
-              "assets/images/hci_adventures.jpg",
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * .32,
+              "assets/images/shutterstock_107331404.jpg",
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * .32,
               fit: BoxFit.cover,
             ),
             LinearProgressIndicator(
@@ -79,17 +77,14 @@ class _RegistrationInfoStepTwoState
             // Rectangle
             GestureDetector(
               child: Container(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * .75,
+                width: MediaQuery.of(context).size.width * .75,
                 height: 45,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
                         color: (_currentSelectedOption ==
-                            CurrentSelectedOption.OPTION_ONE)
+                                CurrentSelectedOption.OPTION_ONE)
                             ? Color(0xffdb0011)
                             : Color(0xffbdbdbd),
                         width: 2)),
@@ -113,17 +108,14 @@ class _RegistrationInfoStepTwoState
             ),
             GestureDetector(
               child: Container(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * .75,
+                width: MediaQuery.of(context).size.width * .75,
                 height: 45,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(
                         color: (_currentSelectedOption ==
-                            CurrentSelectedOption.OPTION_TWO)
+                                CurrentSelectedOption.OPTION_TWO)
                             ? Color(0xffdb0011)
                             : Color(0xffbdbdbd),
                         width: 2)),
@@ -146,10 +138,7 @@ class _RegistrationInfoStepTwoState
               height: 16,
             ),
             Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * .75,
+              width: MediaQuery.of(context).size.width * .75,
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
@@ -182,17 +171,48 @@ class _RegistrationInfoStepTwoState
                 onTap: () {
                   if (_currentSelectedOption ==
                       CurrentSelectedOption.OPTION_ONE) {
-                    _registrationModel
-                        .updateUserData(
+                    showLoading(context);
+                    _registrationModel.updateUserGender(
+                        gender: "male",
                         onSuccess: () {
+                          dismissLoading();
                           Navigator.of(context).pushNamed(
                               Routes.REGISTRATION_INFO_SCREEN_FINAL_SCREEN);
                         },
                         onError: (error) {
+                          dismissLoading();
                           showError(error.toString());
                         });
                   } else if (_currentSelectedOption ==
-                      CurrentSelectedOption.OPTION_TWO) {}
+                      CurrentSelectedOption.OPTION_TWO) {
+                    showLoading(context);
+                    _registrationModel.updateUserGender(
+                        gender: "female",
+                        onSuccess: () {
+                          dismissLoading();
+                          Navigator.of(context).pushNamed(
+                              Routes.REGISTRATION_INFO_SCREEN_FINAL_SCREEN);
+                        },
+                        onError: (error) {
+                          dismissLoading();
+                          showError(error.toString());
+                        });
+                  } else {
+                    showError("No Answer");
+                  }
+                  // if (_currentSelectedOption ==
+                  //     CurrentSelectedOption.OPTION_ONE) {
+                  //   _registrationModel
+                  //       .updateUserData(
+                  //       onSuccess: () {
+                  //         Navigator.of(context).pushNamed(
+                  //             Routes.REGISTRATION_INFO_SCREEN_FINAL_SCREEN);
+                  //       },
+                  //       onError: (error) {
+                  //         showError(error.toString());
+                  //       });
+                  // } else if (_currentSelectedOption ==
+                  //     CurrentSelectedOption.OPTION_TWO) {}
                 },
               ),
             ),
@@ -206,23 +226,23 @@ class _RegistrationInfoStepTwoState
                 children: [
                   RichText(
                       text: TextSpan(children: [
-                        TextSpan(
-                            style: const TextStyle(
-                                color: const Color(0xffff6a00),
-                                fontWeight: FontWeight.w900,
-                                fontFamily: "GESSTwoBold",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 16.0),
-                            text: S.current.need_support + " "),
-                        TextSpan(
-                            style: const TextStyle(
-                                color: const Color(0xff4f4f4f),
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "GESSTwoBold",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 18.0),
-                            text: S.current.registration_info_step_one),
-                      ])),
+                    TextSpan(
+                        style: const TextStyle(
+                            color: const Color(0xffff6a00),
+                            fontWeight: FontWeight.w900,
+                            fontFamily: "GESSTwoBold",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 16.0),
+                        text: S.current.need_support + " "),
+                    TextSpan(
+                        style: const TextStyle(
+                            color: const Color(0xff4f4f4f),
+                            fontWeight: FontWeight.w700,
+                            fontFamily: "GESSTwoBold",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 18.0),
+                        text: S.current.registration_info_step_one),
+                  ])),
                 ],
               ),
             ),

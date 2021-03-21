@@ -40,9 +40,11 @@ class DIOManager {
   static const String GET_JOBS = "/jobs";
   static const String GET_NATIONALITY = "/nationalities";
   static const String GET_CITIES = "/countries";
+  static const String BEING_BAILED_USERS = "/get_warranty_cases";
+  static const String SEARCH_USERS = "/search";
   static const String GET_REGION = "/region/find-all-by-city-id";
   static const String MOST_RECENT_USERS = "/get_new_cases";
-
+  static const String SOCIAL_USER_SIGN_in = "/save_social_media";
   sendLoginRequest(
       {Function onSuccess,
       Function onError,
@@ -97,7 +99,38 @@ class DIOManager {
     );
   }
 
+  createSocialUser({
+    Function onSuccess,
+    Function onError,
+    type,
+    @required String social_id,
+    @required String social_token,
+    @required String social_type,
+    @required String userName,
+    @required String mail,
+    @required String imageUrl,
+  }) {
+    var bodyParameter;
+    var url;
 
+    url = SOCIAL_USER_SIGN_in;
+
+    bodyParameter = {
+      "name": userName,
+      "social_id": social_id,
+      "social_token": social_token,
+      "social_type": social_type,
+      "type": type,
+      "email": mail,
+      // "image":imageUrl
+    };
+    _sendPostRequest(
+      onSuccess: onSuccess,
+      onError: onError,
+      url: url,
+      bodyParameters: bodyParameter,
+    );
+  }
 
   getJobs({Function onSuccess, Function onError}) {
     _sendGetRequest(
@@ -122,6 +155,20 @@ class DIOManager {
       url: MOST_RECENT_USERS,
     );
   }
+  getBeingBailedUsers({Function onSuccess, Function onError}) {
+    _sendGetRequest(
+      onSuccess: onSuccess,
+      onError: onError,
+      url: BEING_BAILED_USERS,
+    );
+  }
+  getSearchUsers(String value,{Function onSuccess, Function onError}) {
+    _sendGetRequest(
+      onSuccess: onSuccess,
+      onError: onError,
+      url: SEARCH_USERS + "/$value",
+    );
+  }
   getNationalities({Function onSuccess, Function onError}) {
     _sendGetRequest(
       onSuccess: onSuccess,
@@ -138,8 +185,17 @@ class DIOManager {
         queryParameters: {"city-id": cityId});
   }
 
-
-
+  updateUsergender({uid,String gender, Function onSuccess, Function onError}) {
+    FormData formData = FormData.fromMap({
+      "gender": gender,
+    });
+    _sendFormDataRequest(
+      onSuccess: onSuccess,
+      onError: onError,
+      bodyParameters: formData,
+      url: _UPDATE_USER_DATA + "/$uid",
+    );
+  }
 
   updateUserInfo(
       {Map data,
@@ -156,21 +212,24 @@ class DIOManager {
     MultipartFile file =
         await MultipartFile.fromFile(profileImgPath, filename: profileImgName);
 
+    // FormData formData = FormData.fromMap({
+    //   "image": await MultipartFile.fromFile(
+    //     profileImgPath,
+    //     filename: profileImgName, //add this
+    //   ),
+    // });
+
     FormData formData = FormData.fromMap({
+      "type": type,
+      "date_birth": dateBirth,
+      "country_id": countryId,
+      "job_id": jobId,
+      "nationality_id": nationalityId,
       "image": await MultipartFile.fromFile(
         profileImgPath,
         filename: profileImgName, //add this
       ),
     });
-
-    // FormData formData = FormData.fromMap({
-    //   "type": PrefManager().getUserType() ?? "0",
-    //   "date_birth": dateBirth,
-    //   "country_id": countryId,
-    //   "job_id": jobId,
-    //   "nationality_id": nationalityId,
-    //   "image": file
-    // });
     _sendFormDataRequest(
       onSuccess: onSuccess,
       onError: onError,

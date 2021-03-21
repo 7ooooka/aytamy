@@ -145,6 +145,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "total" : MessageLookupByLibrary.simpleMessage("Total"),
     "transactionSubmitted" : MessageLookupByLibrary.simpleMessage("you order has been sent !"),
     "transactionSubmittedDesc" : MessageLookupByLibrary.simpleMessage("You will receive a call from our representatives to confirm your appointment  You can track your order from"),
+    "treatementBank" : MessageLookupByLibrary.simpleMessage("To be more careful about the orphans orphan we seek, through the application of orphans, to provide packages and medicines for orphans registered with us through the treatment bank.\n  The treatment bank is one of the orphans banks where we receive donations and based on the treatment lists for orphans, the packages are sent to our orphans directly through our agents in all countries where the inclusion of their orphans is available, and the verified ones are carried out by social workers tasked with verifying cases of orphans"),
     "tryAgain" : MessageLookupByLibrary.simpleMessage("Try again"),
     "userName" : MessageLookupByLibrary.simpleMessage("User name"),
     "yes" : MessageLookupByLibrary.simpleMessage("Yes"),

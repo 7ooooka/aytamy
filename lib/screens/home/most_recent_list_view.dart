@@ -15,22 +15,29 @@ class MostRecentListView extends StatefulWidget {
 }
 
 class _MostRecentListViewState extends State<MostRecentListView> {
-  final _pagingController = PagingController<int, User>(
-    firstPageKey: 0,
+  User user;
+  PageController _pagingController = new PageController(
+    initialPage: 0,
+    viewportFraction: 0.75,
   );
 
   @override
   void initState() {
-    // _pagingController.addPageRequestListener((pageKey) {
-    //   _fetchPage(pageKey);
-    // });
-    Provider.of<HomeModel>(context, listen: false).getMostRecentUsers();
     super.initState();
+    Provider.of<HomeModel>(context, listen: false).getMostRecentUsers();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      try {
+        Future.delayed(Duration(milliseconds: 600), () {
+          _pagingController.jumpToPage(1);
+          _pagingController.jumpToPage(0);
+        });
+      } catch (error) {}
+    });
   }
 
-  Future<void> _fetchPage(int pageKey) async {
-    final nextPageKey = pageKey + 1;
-  }
+  // Future<void> _fetchPage(int pageKey) async {
+  //   final nextPageKey = pageKey + 1;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +50,6 @@ class _MostRecentListViewState extends State<MostRecentListView> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              color: Colors.red,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -67,19 +73,40 @@ class _MostRecentListViewState extends State<MostRecentListView> {
   }
 
   Widget renderMostRecentUsers(List<User> mostRecentUser) {
-    if (mostRecentUser != null) {
-      if (mostRecentUser.isEmpty) {
-        _pagingController.itemList = [];
-      } else {
-        _pagingController.appendLastPage(mostRecentUser);
-      }
-    }
-    return PagedGridView(
+    // if (mostRecentUser != null) {
+    //   if (mostRecentUser.isEmpty) {
+    //     _pagingController.itemList = [];
+    //   } else {
+    //     _pagingController.appendLastPage(mostRecentUser);
+    //     if (mostRecentUser!=null){
+    //       print(mostRecentUser.length.toString() + "lenghththth");
+    //     }
+    //   }
+    // }
+    return PageView.builder(
+        itemCount: mostRecentUser.length,
+        controller: _pagingController,
+        itemBuilder: (BuildContext context, int index) {
+          return
+            mostRecentUser!=null?
+            CaseItemView(index: index,):Text("Loading...");
+        },
+        onPageChanged: (x) {
+/*    setState(() {
+    selectedSubject = subjects.docs[x].id;
+    selectedSubjectTitle =
+    subjects.docs[x].data()['name'];
+    });*/
+        });
+
+    /*PagedGridView(
       pagingController: _pagingController,
       scrollDirection: Axis.vertical,
       builderDelegate: PagedChildBuilderDelegate<User>(
         itemBuilder: (context, user, index) {
-          return CaseItemView();
+          return
+            mostRecentUser!=null?
+            CaseItemView(index: index,):Text("Loading...");
         },
         firstPageProgressIndicatorBuilder: (context) => Center(
           child: CircularProgressIndicator(),
@@ -94,12 +121,12 @@ class _MostRecentListViewState extends State<MostRecentListView> {
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
       ),
-    );
-  }
+    );*/
 
-  @override
-  void dispose() {
-    _pagingController.dispose();
-    super.dispose();
+    @override
+    void dispose() {
+      _pagingController.dispose();
+      super.dispose();
+    }
   }
 }

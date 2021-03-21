@@ -46,9 +46,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Image.asset(
-                    "assets/logo.png",
-                    height: MediaQuery.of(context).size.height * .35,
+                  Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    height: 128.00436401367188,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                    ),
+                    child: Image.asset(
+                      "assets/logo.png",
+                      height: MediaQuery.of(context).size.height * .35,
+                    ),
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.max,
@@ -178,20 +185,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onTap: () {
                             if (validateForm()) {
                               showLoading(context);
-                              _registrationModel
-                                  .signUpUser(
-                                      userName: _userNameController.value.text,
-                                      email: _emailController.value.text,
-                                      password: _passwordController.value.text,
-                                      onSuccess: () {
-                                        Navigator.of(context).pushNamed(Routes
-                                            .REGISTRATION_INFO_SCREEN_STEP_ONE);
-                                        dismissLoading();
-                                      },
-                                      onError: (errorResponse) {
-                                        showError(errorResponse);
-                                        dismissLoading();
-                                      });
+                              _registrationModel.signUpUser(
+                                  userName: _userNameController.value.text,
+                                  email: _emailController.value.text,
+                                  password: _passwordController.value.text,
+                                  onSuccess: () {
+                                    Navigator.of(context).pushNamed(Routes
+                                        .REGISTRATION_INFO_SCREEN_STEP_ONE);
+                                    dismissLoading();
+                                  },
+                                  onError: (errorResponse) {
+                                    showError(errorResponse);
+                                    dismissLoading();
+                                  });
                             }
                             // Navigator.of(context)
                             //     .pushNamed(Routes.SIGN_UP_STEP_ONE);
@@ -200,70 +206,98 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         height: 22,
                       ),
                       // Rectangle
-                      Container(
-                        width: MediaQuery.of(context).size.width * .80,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                                color: Color(0xff0078d7), width: 1.7)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 22,
-                            ),
-                            Text(S.current.signUpFaceBook,
-                                style: const TextStyle(
-                                    color: const Color(0xff0078d7),
-                                    fontWeight: FontWeight.w900,
-                                    fontFamily: "GESSTwoBold",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 16.0),
-                                textAlign: TextAlign.left),
-                            Container(
-                              margin: EdgeInsets.only(left: 18),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.blue,
+                      InkWell(
+                        onTap: () {
+                          showLoading(context);
+                          _registrationModel.signInWithFacebook(
+                              onSucces: () {
+                                dismissLoading();
+                            Navigator.of(context).pushNamed(
+                                Routes.REGISTRATION_INFO_SCREEN_STEP_ONE);
+
+                          }, onError: (errorResponse) {
+                            dismissLoading();
+                            showError(errorResponse);
+                          });
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .80,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                  color: Color(0xff0078d7), width: 1.7)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 22,
                               ),
-                            ),
-                          ],
+                              Text(S.current.signUpFaceBook,
+                                  style: const TextStyle(
+                                      color: const Color(0xff0078d7),
+                                      fontWeight: FontWeight.w900,
+                                      fontFamily: "GESSTwoBold",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 16.0),
+                                  textAlign: TextAlign.left),
+                              Container(
+                                margin: EdgeInsets.only(left: 18),
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
                         height: 22,
                       ),
                       // Rectangle
-                      Container(
-                        width: MediaQuery.of(context).size.width * .80,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                                color: Color(0xffdb0011), width: 1.7)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 22,
-                            ),
-                            Text(S.current.signUpGoogle,
-                                style: TextStyle(
-                                    color: Color(0xffdb0011),
-                                    fontWeight: FontWeight.w900,
-                                    fontFamily: "GESSTwoBold",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 16.0),
-                                textAlign: TextAlign.left),
-                            Container(
-                              margin: EdgeInsets.only(left: 18),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.red,
+                      InkWell(
+                        onTap: () {
+                          showLoading(context);
+                          _registrationModel.signInWithGoogle(onSucces: () {
+                            Navigator.of(context).pushNamed(
+                                Routes.REGISTRATION_INFO_SCREEN_STEP_ONE);
+                            dismissLoading();
+                          }, onError: (errorResponse) {
+                            showError(errorResponse);
+                            dismissLoading();
+                          });
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * .80,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                  color: Color(0xffdb0011), width: 1.7)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: 22,
                               ),
-                            ),
-                          ],
+                              Text(S.current.signUpGoogle,
+                                  style: TextStyle(
+                                      color: Color(0xffdb0011),
+                                      fontWeight: FontWeight.w900,
+                                      fontFamily: "GESSTwoBold",
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 16.0),
+                                  textAlign: TextAlign.left),
+                              Container(
+                                margin: EdgeInsets.only(left: 18),
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       )
                     ],

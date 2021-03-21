@@ -6,6 +6,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../app/app_model.dart';
+import '../signup/provider/registrationModel.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -16,7 +19,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  RegistrationModel _registrationModel = RegistrationModel();
+  final _app = AppModel();
   Widget build(BuildContext context) {
     print("IntroScreen ---> Build()");
     return Scaffold(
@@ -37,9 +41,16 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Image.asset(
-                  "assets/logo.png",
-                  height: MediaQuery.of(context).size.height * .35,
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  height: 128.00436401367188,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                  ),
+                  child: Image.asset(
+                    "assets/logo.png",
+                    height: MediaQuery.of(context).size.height * .35,
+                  ),
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.max,
@@ -68,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               color: Colors.red,
                             ),
                             // hintText: 'What do people call you?',
-                            labelText: S.current.userName,
+                            labelText: S.current.email,
                           ),
                         )),
                     SizedBox(
@@ -138,8 +149,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       onTap: () {
                         if (validateForm()) {
-                          Navigator.of(context).pushNamedAndRemoveUntil(
-                              Routes.HOME, (route) => false);
+                          showLoading(context);
+                          _registrationModel.loginUser(
+                              email: _userNameController.value.text,
+                              password: _passwordController.value.text,
+                              onSuccess: () {
+                                _app.setIsUserLoggedIn(true);
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    Routes.HOME, (route) => false);
+                                dismissLoading();
+                              },
+                              onError: (errorResponse) {
+                                showError(errorResponse);
+                                dismissLoading();
+                              });
                         }
                       },
                     ),
@@ -147,71 +170,99 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 22,
                     ),
                     // Rectangle
-                    Container(
-                      width: MediaQuery.of(context).size.width * .80,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border:
-                              Border.all(color: Color(0xff0078d7), width: 1.7)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 22,
-                          ),
-                          Text(S.current.signUpFaceBook,
-                              style: const TextStyle(
-                                  color: const Color(0xff0078d7),
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: "GESSTwoBold",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16.0),
-                              textAlign: TextAlign.left),
-                          Container(
-                            margin: EdgeInsets.only(left: 18),
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.blue,
+                    InkWell(
+                      onTap: () {
+                        showLoading(context);
+                        _registrationModel.signInWithFacebook(
+                            onSucces: (email) {
+                          print("fafafafa" + email);
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              Routes.HOME, (route) => false);
+                          dismissLoading();
+                        }, onError: (errorResponse) {
+                          showError(errorResponse);
+                          dismissLoading();
+                        });
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * .80,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: Color(0xff0078d7), width: 1.7)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 22,
                             ),
-                          ),
-                        ],
+                            Text(S.current.signUpFaceBook,
+                                style: const TextStyle(
+                                    color: const Color(0xff0078d7),
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: "GESSTwoBold",
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16.0),
+                                textAlign: TextAlign.left),
+                            Container(
+                              margin: EdgeInsets.only(left: 18),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 22,
                     ),
                     // Rectangle
-                    Container(
-                      width: MediaQuery.of(context).size.width * .80,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border:
-                              Border.all(color: Color(0xffdb0011), width: 1.7)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 22,
-                          ),
-                          // كلمة المرور
-                          Text(S.current.signUpGoogle,
-                              style: TextStyle(
-                                  color: Color(0xffdb0011),
-                                  fontWeight: FontWeight.w900,
-                                  fontFamily: "GESSTwoBold",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16.0),
-                              textAlign: TextAlign.left),
-                          Container(
-                            margin: EdgeInsets.only(left: 18),
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.red,
+                    InkWell(
+                      onTap: () {
+                        showLoading(context);
+                        _registrationModel.signInWithGoogle(onSucces: () {
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              Routes.HOME, (route) => false);
+                          dismissLoading();
+                        }, onError: (errorResponse) {
+                          showError(errorResponse);
+                          dismissLoading();
+                        });
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * .80,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: Color(0xffdb0011), width: 1.7)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: 22,
                             ),
-                          ),
-                        ],
+                            // كلمة المرور
+                            Text(S.current.signUpGoogle,
+                                style: TextStyle(
+                                    color: Color(0xffdb0011),
+                                    fontWeight: FontWeight.w900,
+                                    fontFamily: "GESSTwoBold",
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16.0),
+                                textAlign: TextAlign.left),
+                            Container(
+                              margin: EdgeInsets.only(left: 18),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],

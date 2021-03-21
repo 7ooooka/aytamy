@@ -6,10 +6,13 @@ import 'package:aytamy/screens/signup/model/city.dart';
 import 'package:aytamy/screens/signup/model/job.dart';
 import 'package:aytamy/screens/signup/model/nationality.dart';
 import 'package:aytamy/screens/signup/provider/registrationModel.dart';
+import 'package:date_format/date_format.dart' as Format;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+
+import '../../../app/route.dart';
 
 class RegistrationInfoFinalScreen extends StatefulWidget {
   @override
@@ -103,9 +106,16 @@ class _RegistrationInfoFinalScreenState
                             width: MediaQuery.of(context).size.width * .98,
                             fit: BoxFit.fill,
                           )
-                        : Image.asset(
-                            "assets/logo.png",
-                            height: MediaQuery.of(context).size.height * .35,
+                        : Container(
+                            margin: EdgeInsets.all(20),
+                            height: 128.00436401367188,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                            ),
+                            child: Image.asset(
+                              "assets/logo.png",
+                              height: MediaQuery.of(context).size.height * .35,
+                            ),
                           ),
                     Align(
                       alignment: Alignment.topLeft,
@@ -216,20 +226,19 @@ class _RegistrationInfoFinalScreenState
                                     fontSize: 21.0),
                                 textAlign: TextAlign.left),
                             onTap: () {
+                              String BirthDate = Format.formatDate(selectedDate, [Format.yyyy, '-', Format.mm, '-', Format.dd]);
                               showLoading(context);
                               _registrationModel.updateUserData(
-                                  birthDate: selectedDate
-                                      .toString()
-                                      .replaceAll("/", "-"),
-                                  jobId:
-                                      _selectedDropdownJobValue?.id.toString(),
-                                  nationalityId:
-                                      _selectedDropdownJobValue?.id.toString(),
-                                  countryID:
-                                      _selectedDropdownCityValue?.id.toString(),
+                                  birthDate: BirthDate,
+                                  jobId: _selectedDropdownJobValue?.id,
+                                  nationalityId: _selectedDropdownJobValue?.id,
+                                  countryID: _selectedDropdownCityValue?.id,
                                   profileImagePath: _profileImagePath,
                                   onSuccess: () {
                                     dismissLoading();
+                                    Navigator.of(context)
+                                        .pushNamedAndRemoveUntil(
+                                            Routes.HOME, (route) => false);
                                   },
                                   onError: (error) {
                                     showError(error.toString());

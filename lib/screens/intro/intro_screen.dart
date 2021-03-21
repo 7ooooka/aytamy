@@ -15,11 +15,18 @@ class IntroScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               SizedBox(
-                height: 22,
+                height: MediaQuery.of(context).size.height * .1,
               ),
-              Image.asset(
-                "assets/logo.png",
-                height: MediaQuery.of(context).size.height * .45,
+              Container(
+                margin: EdgeInsets.only(bottom: 20),
+                height: 128.00436401367188,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Image.asset(
+                  "assets/logo.png",
+                  height: MediaQuery.of(context).size.height * .35,
+                ),
               ),
               Column(
                 children: [
@@ -148,7 +155,7 @@ class IntroScreen extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.of(context).pushNamed(Routes.HOME);
+                      Navigator.of(context).pushNamed(Routes.SIGN_UP);
                     },
                   )
                 ],

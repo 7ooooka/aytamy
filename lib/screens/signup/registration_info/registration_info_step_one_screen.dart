@@ -3,6 +3,9 @@ import 'package:aytamy/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../app/route.dart';
+import '../../../common/stats_widgets.dart';
+
 class RegistrationInfoStepOneScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -38,7 +41,7 @@ class _RegistrationInfo extends State<RegistrationInfoStepOneScreen> {
           Image.asset(
             "assets/images/hci_adventures.jpg",
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height * .32,
+            height: MediaQuery.of(context).size.height * .38,
             fit: BoxFit.cover,
           ),
           LinearProgressIndicator(
@@ -126,37 +129,48 @@ class _RegistrationInfo extends State<RegistrationInfoStepOneScreen> {
           SizedBox(
             height: 16,
           ),
-          Container(
-            width: MediaQuery.of(context).size.width * .75,
-            height: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Color(0xffdb0011),
-            ),
+          InkWell(
+            onTap: (){
+              if(_currentSelectedOption!=null) {
+                Navigator.of(context).pushNamed(Routes
+                    .REGISTRATION_INFO_SCREEN_STEP_TWO);
+              }
+              else{
+                showError("No Answer");
+              }
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width * .75,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Color(0xffdb0011),
+              ),
 
 //////////////////////
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 22,
-                ),
-                Text(S.current.continueText,
-                    style: const TextStyle(
-                        color: const Color(0xffffffff),
-                        fontWeight: FontWeight.w700,
-                        fontFamily: "GESSTwoBold",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 21.0),
-                    textAlign: TextAlign.left),
-                Container(
-                  margin: EdgeInsets.only(left: 18),
-                  child: Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 22,
                   ),
-                ),
-              ],
+                  Text(S.current.continueText,
+                      style: const TextStyle(
+                          color: const Color(0xffffffff),
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "GESSTwoBold",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 21.0),
+                      textAlign: TextAlign.left),
+                  Container(
+                    margin: EdgeInsets.only(left: 18),
+                    child: Icon(
+                      Icons.arrow_forward_ios,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(

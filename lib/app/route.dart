@@ -5,6 +5,9 @@ import 'package:aytamy/screens/signup/registration_info/registration_info_screen
 import 'package:aytamy/screens/signup/registration_info/registration_info_step_one_screen.dart';
 import 'package:aytamy/screens/signup/registration_info/registration_info_screen_step_two.dart';
 import 'package:aytamy/screens/signup/signup_screen.dart';
+import 'package:aytamy/screens/home/details_screens/food_screen.dart';
+import 'package:aytamy/screens/home/details_screens/treatement_sceen.dart';
+import 'package:aytamy/screens/home/details_screens/clothes_screen.dart';
 import 'package:flutter/material.dart';
 
 class Routes {
@@ -20,6 +23,11 @@ class Routes {
    static const REGISTRATION_INFO_SCREEN_STEP_TWO= "/registration_info_screen_step_two";
   static const REGISTRATION_INFO_SCREEN_FINAL_SCREEN = "/registration_info_final";
   static const USER_INFO_SCREEN = "/user_info_screen";
+  static const FOOD_SCREEN = "/food_screen";
+  static const TREATEMENT_SCREEN = "/treatement_screen";
+  static const CLOTHES_SCREEN = "/clothes_screen";
+
+
 
   // static const SERVICE_FEATURES = "/service_features";
   // static const SUB_SERVICE_FEATURES = "/sub_service_features";
@@ -39,7 +47,9 @@ class Routes {
     REGISTRATION_INFO_SCREEN_STEP_TWO: (context) => RegistrationInfoStepTwoScreen(),
     REGISTRATION_INFO_SCREEN_FINAL_SCREEN: (context) => RegistrationInfoFinalScreen(),
     HOME: (context) => HomeScreen(),
-
+    FOOD_SCREEN:(context) => FoodScreen(),
+    TREATEMENT_SCREEN:(context) => treatementScreen(),
+    CLOTHES_SCREEN:(context) => ClothesScreen(),
     // SIGN_UP_SUCCESS: (context) => SignUpSuccessScreen(),
     // FORGOT_PASSWORD: (context) => ForgotPasswordScreen(),
     // LOGIN: (context) => LoginScreen(),

@@ -20,6 +20,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/home/provider/home_model.dart';
+import '../screens/signup/signup_screen.dart';
+import '../screens/splash.dart';
 import 'app_model.dart';
 
 class App extends StatefulWidget {
@@ -73,7 +76,9 @@ class AppState extends State<App> {
                 builder: (context, value, child) {
                   return MultiProvider(
                     providers: [
-                      // Provider<AppModel>.value(value: widget._app),
+                      ChangeNotifierProvider<HomeModel>(
+                        create: (context) => HomeModel(),
+                      ),
                       ChangeNotifierProvider.value(value: _app),
                       ChangeNotifierProvider.value(value: _userModel),
                     ],
@@ -116,12 +121,12 @@ class AppState extends State<App> {
   }
 
   getNextScreen() {
-    return HomeScreen();
     // return HomeScreen();
-    // if (PrefManager().getUserToken() != null) {
-    //   return HomeScreen();
-    // } else {
-    //   return SignUpScreen();
-    // }
+    // return RegistrationInfoFinalScreen();
+    if (PrefManager().getUserToken() != null) {
+      return HomeScreen();
+    } else {
+      return SplashScreen();
+    }
   }
 }
