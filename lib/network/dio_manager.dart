@@ -196,6 +196,17 @@ class DIOManager {
       url: _UPDATE_USER_DATA + "/$uid",
     );
   }
+  updateUserwarranty({uid,int warranty, Function onSuccess, Function onError}) {
+    FormData formData = FormData.fromMap({
+      "warranty": warranty,
+    });
+    _sendFormDataRequest(
+      onSuccess: onSuccess,
+      onError: onError,
+      bodyParameters: formData,
+      url: _UPDATE_USER_DATA + "/$uid",
+    );
+  }
 
   updateUserInfo(
       {Map data,

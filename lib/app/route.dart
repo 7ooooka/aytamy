@@ -4,6 +4,7 @@ import 'package:aytamy/screens/login/login_screen.dart';
 import 'package:aytamy/screens/signup/registration_info/registration_info_screen_final.dart';
 import 'package:aytamy/screens/signup/registration_info/registration_info_step_one_screen.dart';
 import 'package:aytamy/screens/signup/registration_info/registration_info_screen_step_two.dart';
+import 'package:aytamy/screens/signup/registration_info/registration_info_screen_three.dart';
 import 'package:aytamy/screens/signup/signup_screen.dart';
 import 'package:aytamy/screens/home/details_screens/food_screen.dart';
 import 'package:aytamy/screens/home/details_screens/treatement_sceen.dart';
@@ -22,6 +23,7 @@ class Routes {
    static const REGISTRATION_INFO_SCREEN_STEP_ONE = "/registration_info_screen_step_one";
    static const REGISTRATION_INFO_SCREEN_STEP_TWO= "/registration_info_screen_step_two";
   static const REGISTRATION_INFO_SCREEN_FINAL_SCREEN = "/registration_info_final";
+  static const REGISTRATION_INFO_SCREEN_THIRD_SCREEN = "/registration_info_screen_three";
   static const USER_INFO_SCREEN = "/user_info_screen";
   static const FOOD_SCREEN = "/food_screen";
   static const TREATEMENT_SCREEN = "/treatement_screen";
@@ -50,6 +52,7 @@ class Routes {
     FOOD_SCREEN:(context) => FoodScreen(),
     TREATEMENT_SCREEN:(context) => treatementScreen(),
     CLOTHES_SCREEN:(context) => ClothesScreen(),
+    REGISTRATION_INFO_SCREEN_THIRD_SCREEN:(context) => RegistrationInfoStepThreeScreen(),
     // SIGN_UP_SUCCESS: (context) => SignUpSuccessScreen(),
     // FORGOT_PASSWORD: (context) => ForgotPasswordScreen(),
     // LOGIN: (context) => LoginScreen(),

@@ -177,7 +177,7 @@ class _RegistrationInfoStepTwoState
                         onSuccess: () {
                           dismissLoading();
                           Navigator.of(context).pushNamed(
-                              Routes.REGISTRATION_INFO_SCREEN_FINAL_SCREEN);
+                              Routes.REGISTRATION_INFO_SCREEN_THIRD_SCREEN);
                         },
                         onError: (error) {
                           dismissLoading();
@@ -191,7 +191,7 @@ class _RegistrationInfoStepTwoState
                         onSuccess: () {
                           dismissLoading();
                           Navigator.of(context).pushNamed(
-                              Routes.REGISTRATION_INFO_SCREEN_FINAL_SCREEN);
+                              Routes.REGISTRATION_INFO_SCREEN_THIRD_SCREEN);
                         },
                         onError: (error) {
                           dismissLoading();

@@ -239,6 +239,20 @@ class RegistrationModel {
         },
         uid: int.parse(PrefManager().getUserId()) ?? 7);
   }
+  updateUserwarranty({int warranty, onSuccess, onError}) {
+    DIOManager().updateUserwarranty(
+        warranty: warranty,
+        onSuccess: (response) {
+          SignUpResponse signUpResponse = SignUpResponse.fromJson(response);
+          _saveUserData(signUpResponse.data);
+          onSuccess();
+        },
+        onError: (error) {
+          onError(error.toString());
+          print("updateUserData onError ---->" + error.toString());
+        },
+        uid: int.parse(PrefManager().getUserId()) ?? 7);
+  }
 
   updateUserData(
       {File profileImagePath,
