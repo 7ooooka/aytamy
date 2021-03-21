@@ -113,8 +113,10 @@ class _RegistrationInfoFinalScreenState
                               color: Colors.white,
                             ),
                             child: Image.asset(
-                              "assets/logo.png",
-                              height: MediaQuery.of(context).size.height * .35,
+                              "assets/images/shutterstock_107332775.png",
+                              width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height,
+                              fit: BoxFit.cover,
                             ),
                           ),
                     Align(
