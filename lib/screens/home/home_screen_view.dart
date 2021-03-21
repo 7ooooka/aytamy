@@ -348,7 +348,7 @@ class HomeScreenViewState extends State with SingleTickerProviderStateMixin {
                         fontStyle: FontStyle.normal,
                         letterSpacing: -0.16071428775787353,
                       )),
-                  new Text(
+                   new Text(
                       "منصة ايتام تربط الايتام مع الكفيل ليضمن كفالة بدون وسيط ايضا يمكنك متابعتنا على منصات التواصل الاجتماعي (فيسبوك ، تويتر ، انستجرام ، واتساب) لمتابعتنا.",
                       style: TextStyle(
                         fontFamily: 'GESSTwo',
