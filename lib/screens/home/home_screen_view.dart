@@ -1,5 +1,6 @@
 import 'package:aytamy/generated/l10n.dart';
 import 'package:aytamy/screens/home/provider/home_model.dart';
+import 'package:aytamy/screens/home/dialog_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -197,23 +198,28 @@ class HomeScreenViewState extends State with SingleTickerProviderStateMixin {
                           controller: _tabController,
                         ));
             }),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: new Container(
-                width: MediaQuery.of(context).size.width * 0.85,
-                height: 48,
-                decoration: new BoxDecoration(
-                    color: Color(0xffdb0011),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Center(
-                  child: new Text("اكفل",
-                      style: TextStyle(
-                        fontFamily: 'GESSTwo',
-                        color: Color(0xffffffff),
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        fontStyle: FontStyle.normal,
-                      )),
+            InkWell(
+              onTap: (){
+                addPayDialogView(context: context);
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: new Container(
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  height: 48,
+                  decoration: new BoxDecoration(
+                      color: Color(0xffdb0011),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: new Text("اكفل",
+                        style: TextStyle(
+                          fontFamily: 'GESSTwo',
+                          color: Color(0xffffffff),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          fontStyle: FontStyle.normal,
+                        )),
+                  ),
                 ),
               ),
             ),
