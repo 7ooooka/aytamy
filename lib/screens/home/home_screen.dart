@@ -29,50 +29,55 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          centerTitle: false,
-          title: // كلمة المرور
-              Text(S.current.main,
-                  style: const TextStyle(
-                      color: const Color(0xffffffff),
-                      fontWeight: FontWeight.w700,
-                      fontFamily: "GESSTwoBold",
-                      fontStyle: FontStyle.normal,
-                      fontSize: 18.0),
-                  textAlign: TextAlign.center),
-          actions: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18),
-              child: GestureDetector(
-                child: Icon(Icons.camera),
-                onTap: () {
-                  // Navigator.of(context).pushNamed(Routes.CART);
-                },
+      appBar: AppBar(
+        elevation: 0.0,
+        centerTitle: false,
+        title: // كلمة المرور
+            Text(S.current.main,
+                style: const TextStyle(
+                    color: const Color(0xffffffff),
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "GESSTwoBold",
+                    fontStyle: FontStyle.normal,
+                    fontSize: 18.0),
+                textAlign: TextAlign.center),
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18),
+            child: GestureDetector(
+              child: new Container(
+                padding: EdgeInsets.all(5),
+                child: Image.asset(
+                  "assets/logo.png",
+                  color: Colors.white,
+                ),
               ),
+              onTap: () {
+                // Navigator.of(context).pushNamed(Routes.CART);
+              },
             ),
-          ],
-        ),
-        drawer: HomeNavigationDrawer(
-          onNavigateClick: (selectedNav) {
-            setState(() {
-              _currentDrawerSelection = selectedNav;
-            });
-          },
-        ),
-        body: Container(
-
-              margin: EdgeInsets.only(top: 2.0),
-              alignment: Alignment.topCenter,
-              child: renderMainView()),
-        );
+          ),
+        ],
+      ),
+      drawer: HomeNavigationDrawer(
+        onNavigateClick: (selectedNav) {
+          setState(() {
+            _currentDrawerSelection = selectedNav;
+          });
+        },
+      ),
+      body: Container(
+          margin: EdgeInsets.only(top: 2.0),
+          alignment: Alignment.topCenter,
+          child: renderMainView()),
+    );
   }
 
   Widget renderMainView() {
     print("renderMainView ----> " + _currentDrawerSelection.toString());
     switch (_currentDrawerSelection) {
       case CurrentHomeSelection.HOME:
-      return HomeScreenView();
+        return HomeScreenView();
       case CurrentHomeSelection.TRANSACTION:
         // return TransactionScreen();
 

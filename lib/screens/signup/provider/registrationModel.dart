@@ -39,12 +39,24 @@ class RegistrationModel {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
       accessToken = googleAuth.accessToken;
-      _app.setUserId(googleUser.id);
-      _app.setUserName(googleUser.displayName);
-      _app.setUserToken(accessToken);
-      _app.setUserMail(googleUser.email);
-      _app.setUserProfileImage(googleUser.photoUrl);
-      onSucces();
+      signUpSocialUser(
+          social_type: "google",
+          social_token: accessToken,
+          social_id: googleUser.id,
+          userName: googleUser.displayName,
+          email: googleUser.email,
+          imageUrl: googleUser.photoUrl.toString(),
+          onSuccess: onSucces,
+          onError: (error) {
+            onError(error.toString());
+            print("signUpUser onError ---->" + error.toString());
+          });
+      // _app.setUserId(googleUser.id);
+      // _app.setUserName(googleUser.displayName);
+      // _app.setUserToken(accessToken);
+      // _app.setUserMail(googleUser.email);
+      // _app.setUserProfileImage(googleUser.photoUrl);
+      // onSucces();
       // }
     } catch (e) {
       print("erroror" + e.toString());
