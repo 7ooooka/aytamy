@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="290bd893-7214-4e22-8839-6b3778cfe94f" name="Default Changelist" comment="commitm">
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616572024800</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="commitm">
+      <created>1616608722892</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1616608722892</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -171,22 +179,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1616489267671" />
-    <state width="1877" height="290" key="GridCell.Tab.0.bottom" timestamp="1616571956072">
+    <state width="1877" height="290" key="GridCell.Tab.0.bottom" timestamp="1616611322558">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1616571956072" />
-    <state width="1877" height="290" key="GridCell.Tab.0.center" timestamp="1616571956072">
+    <state width="1877" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1616611322558" />
+    <state width="1877" height="290" key="GridCell.Tab.0.center" timestamp="1616611322557">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="290" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1616571956072" />
-    <state width="1877" height="290" key="GridCell.Tab.0.left" timestamp="1616571956072">
+    <state width="1877" height="290" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1616611322557" />
+    <state width="1877" height="290" key="GridCell.Tab.0.left" timestamp="1616611322557">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="290" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1616571956072" />
-    <state width="1877" height="290" key="GridCell.Tab.0.right" timestamp="1616571956072">
+    <state width="1877" height="290" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1616611322557" />
+    <state width="1877" height="290" key="GridCell.Tab.0.right" timestamp="1616611322557">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="290" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1616571956072" />
+    <state width="1877" height="290" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1616611322557" />
     <state x="92" y="92" width="1736" height="856" key="ShowDiffWithBranchDialog" timestamp="1616447934445">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
