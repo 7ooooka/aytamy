@@ -20,82 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="290bd893-7214-4e22-8839-6b3778cfe94f" name="Default Changelist" comment="commitm">
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/1.5x/images/confused-face.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/1.5x/images/empty-box.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/1.5x/images/frustrated-face.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/2.0x/ic_filter.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/2.0x/images/confused-face.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/2.0x/images/empty-box.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/3.0x/images/confused-face.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/3.0x/images/empty-box.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/4.0x/images/confused-face.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/4.0x/images/empty-box.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/4.0x/images/frustrated-face.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/app.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/app_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/app_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/route.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/colors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/colors.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/exception_indicators/empty_list_indicator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/exception_indicators/empty_list_indicator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/exception_indicators/error_indicator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/exception_indicators/error_indicator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/exception_indicators/exception_indicator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/exception_indicators/exception_indicator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/exception_indicators/generic_error_indicator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/exception_indicators/generic_error_indicator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/exception_indicators/no_connection_indicator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/exception_indicators/no_connection_indicator.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/fonts.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/fonts.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/model/ErrorResponse.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/model/ErrorResponse.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/model/User.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/model/User.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/providers/user_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/providers/user_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/stats_widgets.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/stats_widgets.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/styles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/styles.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/tools.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/tools.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/widgets/CircleImageWidget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/widgets/CircleImageWidget.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/widgets/custom_action_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/widgets/custom_action_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/widgets/custom_image_loader.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/widgets/custom_image_loader.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/widgets/skeleton.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/widgets/skeleton.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/widgets/slide_dialog.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/widgets/slide_dialog.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/widgets/snak_bar_message.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/widgets/snak_bar_message.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/l10n/intl_ar.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/intl_ar.arb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/l10n/intl_en.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/intl_en.arb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/network/dio_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/network/dio_manager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/being_bailed_list_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/being_bailed_list_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/case_item_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/case_item_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/details_screens/clothes_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/details_screens/clothes_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/details_screens/food_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/details_screens/food_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/details_screens/treatement_sceen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/details_screens/treatement_sceen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/dialog_view.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/home_navigation_drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/home_navigation_drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/home_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/home_screen_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/home_screen_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/model/response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/model/response.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/most_recent_list_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/most_recent_list_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/provider/home_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/provider/home_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home/search_list_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home/search_list_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/intro/intro_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/intro/intro_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/login/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/login/login_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/login/res.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/login/res.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/main_screen.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/model/city.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/model/city.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/model/city_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/model/city_response.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/model/job.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/model/job.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/model/job_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/model/job_response.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/model/nationality.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/model/nationality.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/model/nationality_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/model/nationality_response.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/model/sign_up_response.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/model/sign_up_response.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/provider/registrationModel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/provider/registrationModel.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/registration_info/registration_info_screen_final.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/registration_info/registration_info_screen_final.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/registration_info/registration_info_screen_step_two.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/registration_info/registration_info_screen_step_two.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/registration_info/registration_info_screen_three.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/registration_info/registration_info_screen_three.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/registration_info/registration_info_step_one_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/registration_info/registration_info_step_one_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/signup/signup_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/signup/signup_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/splash.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/splash.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/storage/pref_manager.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/storage/pref_manager.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616447609029</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="commitm">
+      <created>1616572024800</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1616572024800</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
