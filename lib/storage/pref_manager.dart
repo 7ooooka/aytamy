@@ -4,6 +4,17 @@ String _createdAt;
 String _updatedAt;
 
 class PrefManager {
+  static SharedPreferences _prefs;
+  static Future<SharedPreferences> get _instance async =>
+      _prefs ??= await SharedPreferences.getInstance();
+
+
+// call this method from iniState() function of mainApp().
+  static Future<bool> init() async {
+    _prefs = await _instance;
+    return true;
+  }
+
   static const _LOGIN_STATE = "user_login";
   static const _APP_SEEN = "app_seen";
   static const _TOKEN = "user_token";
@@ -37,286 +48,291 @@ class PrefManager {
 
 // The _internal construction is just a name often given to constructors that are private to the class (the name is not required to be ._internal you can create a private constructor using any Class._someName construction).
 
-  PrefManager._internal();
+  // PrefManager._internal();
+  //
+  // static final PrefManager _instance = PrefManager._internal();
+  //
+  // factory PrefManager() {
+  //   return _instance;
+  // }
 
-  static final PrefManager _instance = PrefManager._internal();
+  // SharedPreferences _prefs;
 
-  factory PrefManager() {
-    return _instance;
-  }
+  // Future<PrefManager> setupSharedPreferences() async {
+  //   // _prefs = await SharedPreferences.getInstance();
+  //   _instance._prefs = await SharedPreferences.getInstance();
+  //       if(_prefs != null){
+  //         print("setupSharedPreferences   ---> true");
+  //       }else{
+  //         print("setupSharedPreferences   ---> false");
+  //       }
+  //
+  //   return _instance;
+  // }
 
-  SharedPreferences _prefs;
-
-  Future<bool> setupSharedPreferences() async {
-    // _prefs = await SharedPreferences.getInstance();
-
-    _instance._prefs = await SharedPreferences.getInstance();
-    return true;
-  }
-
-  clearSharedPreferences() async {
-    if (_instance._prefs != null) {
+  static clearSharedPreferences() async {
+    if (_instance != null) {
       await _prefs.clear();
     }
   }
 
-  setString(String data, String key) async {
+  static setString(String data, String key) async {
     await _prefs.setString(key, data);
   }
 
-  void setUserToken(String data) async {
+  static void setUserToken(String data) async {
     await _prefs.setString(_TOKEN, data);
   }
 
-  String getUserToken() {
+  static String  getUserToken() {
     return _prefs.getString(_TOKEN) ?? null;
   }
 
-  void setUserId(
+  static void setUserId(
     String data,
   ) {
     _prefs.setString(_USER_ID, data);
   }
 
-  void setUserMail(
+  static void setUserMail(
     String data,
   ) {
     _prefs.setString(_USER_MAIL, data);
   }
 
-  void setUserName(
+  static void setUserName(
     String data,
   ) {
     _prefs.setString(_USER_NAME, data);
   }
 
-  void setUserFirstName(
+  static  void setUserFirstName(
     String data,
   ) {
     _prefs.setString(_USER_FIRST_NAME, data);
   }
 
-  void setUserLastName(
+  static void setUserLastName(
     String data,
   ) {
     _prefs.setString(_USER_LAST_NAME, data);
   }
 
-  void setUserPhone(
+  static void setUserPhone(
     String data,
   ) {
     _prefs.setString(_USER_PHONE, data);
   }
 
-  void setUserProfileImage(
+  static void setUserProfileImage(
     String data,
   ) {
     _prefs.setString(_USER_IMAGE, data);
   }
 
-  getUserId() {
-    return _prefs.getString(_USER_ID) ;
+  static getUserId() {
+    return _prefs.getString(_USER_ID);
   }
 
-  String getUserMail() {
+  static String getUserMail() {
     return _prefs.getString(_USER_MAIL) ?? '';
   }
 
-  getUserImage() {
+  static getUserImage() {
     return _prefs.getString(_USER_IMAGE) ?? '';
   }
 
-  String getUserName() {
+  static  String getUserName() {
     return _prefs.getString(_USER_NAME) ?? '';
   }
 
-  String getUserFirstName() {
+  static  String getUserFirstName() {
     return _prefs.getString(_USER_FIRST_NAME) ?? '';
   }
 
-  String getUserLastName() {
+  static String getUserLastName() {
     return _prefs.getString(_USER_LAST_NAME) ?? '';
   }
 
-  String getUserPhone() {
+  static String getUserPhone() {
     return _prefs.getString(_USER_PHONE);
   }
 
-  String getUserType() {
+  static String getUserType() {
     return _prefs.getString(_USER_TYPE);
   }
 
-  void setLang(String userData) {
+  static void setLang(String userData) {
     _prefs.setString(_appLanguage, userData);
   }
 
-  setUserLoginState(bool state) {
+  static setUserLoginState(bool state) {
     _prefs.setBool(_LOGIN_STATE, state);
   }
 
-  bool isUserLoggedIn() {
-    return _prefs.getBool(_LOGIN_STATE) ?? false;
+  static bool isUserLoggedIn() {
+    return _prefs?.getBool(_LOGIN_STATE) ?? false;
   }
 
-  setAppFirstSeenState(bool state) {
+  static setAppFirstSeenState(bool state) {
     _prefs.setBool(_APP_SEEN, state);
   }
 
-  serUserType(String type) {
+  static serUserType(String type) {
     _prefs.setString(_USER_TYPE, type);
   }
 
-  setBirthDate(String birthDate) {
+  static setBirthDate(String birthDate) {
     _prefs.setString(_BIRTH_DATE, birthDate);
   }
 
   ////
 
-  setCountryID(String id) {
+  static setCountryID(String id) {
     _prefs.setString(_COUNTRY_ID, id);
   }
 
-  setCityID(String id) {
+  static setCityID(String id) {
     _prefs.setString(_CITY_ID, id);
   }
 
-  setDreamID(String dreamID) {
+  static setDreamID(String dreamID) {
     _prefs.setString(_DREAM_ID, dreamID);
   }
 
-  setJobID(String jobId) {
+  static setJobID(String jobId) {
     _prefs.setString(_JOB_ID, jobId);
   }
 
-  setEducationId(String eduId) {
+  static setEducationId(String eduId) {
     _prefs.setString(_EDUCATION_ID, eduId);
   }
 
-  setEducationCertificate(String cer) {
+  static  setEducationCertificate(String cer) {
     _prefs.setString(_EDUCATIONAL_CERTIFICATE, cer);
   }
 
-  setNationalID(String id) {
+  static setNationalID(String id) {
     _prefs.setString(_NATIONAL_ID, id);
   }
 
-  setPersonalID(String id) {
+  static setPersonalID(String id) {
     _prefs.setString(_PERSONAL_ID, id);
   }
 
-  serFatherCertificate(String cert) {
+  static serFatherCertificate(String cert) {
     _prefs.setString(_FATHER_CERTIFICATE, cert);
   }
 
-  setMotherCertificate(String cert) {
+  static setMotherCertificate(String cert) {
     _prefs.setString(_MOTHER_CERTIFICATE, cert);
   }
 
-  setParentMobile(String num) {
+  static  setParentMobile(String num) {
     _prefs.setString(_PARENT_MOBILE, num);
   }
 
-  setGender(String type) {
+  static setGender(String type) {
     _prefs.setString(_GENDER, type);
   }
 
-  setDescription(String desc) {
+  static  setDescription(String desc) {
     _prefs.setString(_DESCRIPTION, desc);
   }
 
-  setCompleteStats(String stats) {
+  static  setCompleteStats(String stats) {
     _prefs.setString(_IS_COMPLETED, stats);
   }
 
-  setWhatsApp(String num) {
+  static setWhatsApp(String num) {
     _prefs.setString(_WHATS_APP, num);
   }
 
-  setWarranty(String warranty) {
+  static setWarranty(String warranty) {
     _prefs.setString(_WARRANTY, warranty);
   }
 
   ////
 
-  isAppFirstSeen() {
+  static isAppFirstSeen() {
     return _prefs.getBool(_APP_SEEN);
   }
 
-  String getStringWithKey(String key) {
+  static String getStringWithKey(String key) {
     return _prefs.getString(key);
   }
 
-  String getLang() {
+  static String getLang() {
     String lang = _prefs.getString(_appLanguage);
     return lang;
   }
 
   ///
-  String getCountryID() {
+  static String getCountryID() {
     return _prefs.getString(_COUNTRY_ID);
   }
 
-  String getCityID() {
+  static  String getCityID() {
     return _prefs.getString(_CITY_ID);
   }
 
-  String getDreamID() {
+  static  String getDreamID() {
     return _prefs.getString(_DREAM_ID);
   }
 
-  String getJobID() {
+  static  String getJobID() {
     return _prefs.getString(_JOB_ID);
   }
 
-  String getEducationalID() {
+  static String getEducationalID() {
     return _prefs.getString(_EDUCATION_ID);
   }
 
-  String getEducationCertificate() {
+  static  String getEducationCertificate() {
     return _prefs.getString(_EDUCATIONAL_CERTIFICATE);
   }
 
-  String getNationalID() {
+  static String getNationalID() {
     return _prefs.getString(_NATIONAL_ID);
   }
 
-  String getPersonalID() {
+  static String getPersonalID() {
     return _prefs.getString(_PERSONAL_ID);
   }
 
-  String getFatherCertificate() {
+  static String getFatherCertificate() {
     return _prefs.getString(_FATHER_CERTIFICATE);
   }
 
-  String getMotherCertificate() {
+  static String getMotherCertificate() {
     return _prefs.getString(_MOTHER_CERTIFICATE);
   }
 
-  String getParentMobile() {
+  static String getParentMobile() {
     return _prefs.getString(_PARENT_MOBILE);
   }
 
-  String getGender() {
+  static String getGender() {
     return _prefs.getString(_GENDER);
   }
 
-  String getDescription() {
+  static String getDescription() {
     return _prefs.getString(_DESCRIPTION);
   }
 
-  String getCompleteStats() {
+  static  String getCompleteStats() {
     return _prefs.getString(_IS_COMPLETED);
   }
 
-  String getWhatsApp() {
+  static String getWhatsApp() {
     return _prefs.getString(_WHATS_APP);
   }
 
-  String getWarranty() {
+  static String getWarranty() {
     return _prefs.get(_WARRANTY);
   }
 
-  String getBirthDate() {
+  static String getBirthDate() {
     return _prefs.getString(_BIRTH_DATE);
   }
 }

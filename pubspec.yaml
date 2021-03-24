@@ -125,6 +125,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/icons/
   #    - images/hci_adventures.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see

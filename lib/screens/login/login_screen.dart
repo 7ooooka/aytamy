@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             contentPadding:
                                 EdgeInsets.symmetric(horizontal: 14),
                             suffixIcon: Icon(
-                              Icons.person,
+                              Icons.lock,
                               color: Colors.red,
                             ),
                             // hintText: 'What do people call you?',
@@ -207,9 +207,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 textAlign: TextAlign.left),
                             Container(
                               margin: EdgeInsets.only(left: 18),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.blue,
+                              child: new Image.asset(
+                                "assets/icons/facebook.png",
+                                height: 30,
                               ),
                             ),
                           ],
@@ -256,9 +256,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 textAlign: TextAlign.left),
                             Container(
                               margin: EdgeInsets.only(left: 18),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.red,
+                              child: new Image.asset(
+                                "assets/icons/google.png",
+                                height: 30,
                               ),
                             ),
                           ],

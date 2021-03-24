@@ -8,10 +8,6 @@ import 'package:aytamy/common/styles.dart';
 import 'package:aytamy/common/tools.dart';
 import 'package:aytamy/generated/l10n.dart';
 import 'package:aytamy/screens/home/home_screen.dart';
-import 'package:aytamy/screens/intro/intro_screen.dart';
-import 'package:aytamy/screens/signup/registration_info/registration_info_screen_final.dart';
-import 'package:aytamy/screens/signup/registration_info/registration_info_step_one_screen.dart';
-import 'package:aytamy/screens/signup/registration_info/registration_info_screen_step_two.dart';
 import 'package:aytamy/storage/pref_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +17,6 @@ import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/home/provider/home_model.dart';
-import '../screens/signup/signup_screen.dart';
 import '../screens/splash.dart';
 import 'app_model.dart';
 
@@ -65,8 +60,8 @@ class AppState extends State<App> {
 
   @override
   Widget build(BuildContext appContext) {
-    return FutureBuilder(
-        future: PrefManager().setupSharedPreferences(),
+    return FutureBuilder<bool>(
+        future: PrefManager.init(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             dismissLoading();
@@ -123,9 +118,18 @@ class AppState extends State<App> {
   getNextScreen() {
     // return HomeScreen();
     // return RegistrationInfoFinalScreen();
-    if (PrefManager().getUserToken() != null) {
-      return HomeScreen();
-    } else {
+// print(PrefManager()?.getUserToken().toString());
+//     return Container(color: Colors.red,);
+
+    try {
+      if (PrefManager.getUserToken() != null ||
+          PrefManager.getUserId() != null) {
+        return HomeScreen();
+      } else {
+        return SplashScreen();
+      }
+    } catch (e) {
+      print("error with App class" + e.toString());
       return SplashScreen();
     }
   }

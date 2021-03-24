@@ -19,14 +19,14 @@ class DIOManager {
     dio.options.headers = {
       "Accept-Language": currentLanguage,
     };
-    print("Header AcceptedLanguage --- >" + currentLanguage.toString());
-    if (PrefManager().getUserToken() != null) {
-      dio.options.headers = {
-        "Authorization": "${PrefManager().getUserToken()}",
-        "email": "${PrefManager().getUserMail()}",
-      };
-    }
-    print(dio.options.headers.toString());
+    // print("Header AcceptedLanguage --- >" + currentLanguage.toString());
+    // if (PrefManager().getUserToken() != null) {
+    //   dio.options.headers = {
+    //     "Authorization": "${PrefManager().getUserToken()}",
+    //     "email": "${PrefManager().getUserMail()}",
+    //   };
+    // }
+    // print(dio.options.headers.toString());
     return dio;
   }
 
@@ -220,35 +220,50 @@ class DIOManager {
       profileImgName,
       Function onSuccess,
       Function onError}) async {
-    MultipartFile file =
-        await MultipartFile.fromFile(profileImgPath, filename: profileImgName);
-
+    FormData formData;
     // FormData formData = FormData.fromMap({
     //   "image": await MultipartFile.fromFile(
     //     profileImgPath,
     //     filename: profileImgName, //add this
     //   ),
     // });
+    if (profileImgName!=""&&profileImgPath!="") {
+      MultipartFile file =
+      await MultipartFile.fromFile(profileImgPath, filename: profileImgName);
+       formData = FormData.fromMap({
+        "type": type,
+        "date_birth": dateBirth,
+        "country_id": countryId,
+        "job_id": jobId,
+        "nationality_id": nationalityId,
+        "image":  await MultipartFile.fromFile(
+          profileImgPath,
+          filename: profileImgName, //add this
+        ),
+      });
+       _sendFormDataRequest(
+         onSuccess: onSuccess,
+         onError: onError,
+         bodyParameters: formData,
+         filePath: profileImgPath,
+         fileName: profileImgName,
+         url: _UPDATE_USER_DATA + "/$uid",
+       );
+    }else{
+      formData = FormData.fromMap({
+        "type": type,
+        "date_birth": dateBirth,
+        "country_id": countryId,
+        "job_id": jobId,
+        "nationality_id": nationalityId,});
+      _sendFormDataRequest(
+        onSuccess: onSuccess,
+        onError: onError,
+        bodyParameters: formData,
+        url: _UPDATE_USER_DATA + "/$uid",
+      );
+    }
 
-    FormData formData = FormData.fromMap({
-      "type": type,
-      "date_birth": dateBirth,
-      "country_id": countryId,
-      "job_id": jobId,
-      "nationality_id": nationalityId,
-      "image": await MultipartFile.fromFile(
-        profileImgPath,
-        filename: profileImgName, //add this
-      ),
-    });
-    _sendFormDataRequest(
-      onSuccess: onSuccess,
-      onError: onError,
-      bodyParameters: formData,
-      filePath: profileImgPath,
-      fileName: profileImgName,
-      url: _UPDATE_USER_DATA + "/$uid",
-    );
   }
 
   _sendGetRequest(

@@ -7,9 +7,9 @@ import 'package:provider/provider.dart';
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var appModel = Provider.of<AppModel>(context,listen: false);
+    var appModel = Provider.of<AppModel>(context, listen: false);
     Future.delayed(Duration(seconds: 2), () {
-      if (appModel.isUserLoggedIn()) {
+      if (appModel.isUserLoggedIn() != null && appModel.isUserLoggedIn()) {
         Navigator.of(context).pushNamed(Routes.HOME);
       } else {
         Navigator.of(context).pushNamed(Routes.INTO_SCREEN);
@@ -17,7 +17,7 @@ class SplashScreen extends StatelessWidget {
     });
     return Container(
       child: Center(
-        child:      Container(
+        child: Container(
           margin: EdgeInsets.only(bottom: 20),
           height: 128.00436401367188,
           decoration: BoxDecoration(

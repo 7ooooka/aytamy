@@ -228,7 +228,14 @@ class _RegistrationInfoFinalScreenState
                                     fontSize: 21.0),
                                 textAlign: TextAlign.left),
                             onTap: () {
-                              String BirthDate = Format.formatDate(selectedDate, [Format.yyyy, '-', Format.mm, '-', Format.dd]);
+                              String BirthDate = Format.formatDate(
+                                  selectedDate, [
+                                Format.yyyy,
+                                '-',
+                                Format.mm,
+                                '-',
+                                Format.dd
+                              ]);
                               showLoading(context);
                               _registrationModel.updateUserData(
                                   birthDate: BirthDate,
@@ -243,8 +250,8 @@ class _RegistrationInfoFinalScreenState
                                             Routes.HOME, (route) => false);
                                   },
                                   onError: (error) {
-                                    showError(error.toString());
                                     dismissLoading();
+                                    showError(error.toString());
                                   });
                             },
                           ),

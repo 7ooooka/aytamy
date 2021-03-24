@@ -9,7 +9,7 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="aytamy"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true"
         >

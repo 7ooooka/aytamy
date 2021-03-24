@@ -18,7 +18,7 @@ class _BeingBailedListViewState extends State<BeingBailedListView> {
   User user;
   PageController _pagingController = new PageController(
     initialPage: 0,
-    viewportFraction: 0.75,
+    viewportFraction: 0.85,
   );
 
   @override
@@ -58,7 +58,8 @@ class _BeingBailedListViewState extends State<BeingBailedListView> {
                   SizedBox(
                     height: 10,
                   ),
-                  Expanded(
+                  Container(
+                      height: MediaQuery.of(context).size.height *.28,
                       child: renderMostRecentUsers(homeModel.mostRecentUsers)),
                   SizedBox(
                     height: 10,

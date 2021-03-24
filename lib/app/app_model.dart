@@ -31,90 +31,90 @@ class AppModel extends ChangeNotifier {
     } else {
       locale = Locale.fromSubtags(languageCode: 'en');
     }
-    PrefManager().setLang(local);
+    PrefManager.setLang(local);
     notifyListeners();
   }
 
   setAppFirstSeen(bool state) {
-    PrefManager().setAppFirstSeenState(state);
+    PrefManager.setAppFirstSeenState(state);
   }
 
   setIsUserLoggedIn(bool state) {
-    PrefManager().setUserLoginState(state);
+    PrefManager.setUserLoginState(state);
   }
 
   bool isUserLoggedIn() {
-    return PrefManager().isUserLoggedIn();
+    return PrefManager?.isUserLoggedIn()??false;
   }
 
   setUserToken(token) {
-    PrefManager().setUserToken(token);
+    PrefManager.setUserToken(token);
   }
 
   setUserName(userName) {
-    PrefManager().setUserName(userName);
+    PrefManager.setUserName(userName);
   }
 
   setUserFirstName(firstName) {
-    PrefManager().setUserFirstName(firstName);
+    PrefManager.setUserFirstName(firstName);
   }
 
   setUserLastName(lastName) {
-    PrefManager().setUserLastName(lastName);
+    PrefManager.setUserLastName(lastName);
   }
 
   String getUserToken() {
-    return PrefManager().getUserToken();
+    return PrefManager.getUserToken();
   }
 
   Future<bool> isAppFirstSeen() async {
-    return await PrefManager().isAppFirstSeen();
+    return await PrefManager.isAppFirstSeen();
   }
 
   setUserMail(mail) {
-    PrefManager().setUserMail(mail);
+    PrefManager.setUserMail(mail);
   }
 
 
   setUserPhone(phone) {
-    PrefManager().setUserPhone(phone);
+    PrefManager.setUserPhone(phone);
   }
 
   String getUserMail() {
-    return PrefManager().getUserMail();
+    return PrefManager.getUserMail();
   }
 
   String getUserName() {
-    return PrefManager().getUserName();
+    return PrefManager.getUserName();
   }
 
   String getUserFirstName() {
-    return PrefManager().getUserFirstName();
+    return PrefManager.getUserFirstName();
   }
 
   String getUserLastName() {
-    return PrefManager().getUserLastName();
+    return PrefManager.getUserLastName();
   }
 
   String getUserPhone() {
-    return PrefManager().getUserPhone();
+    return PrefManager.getUserPhone();
   }
 
   String getUserProfileImage() {
     // print(" getUserProfileImage ----->" + PrefManager().getUserImage().toString());
-    return PrefManager().getUserImage() ?? '';
+    return PrefManager.getUserImage() ?? '';
   }
 
   setUserId(id) {
-    PrefManager().setUserId(id.toString());
+    PrefManager.setUserId(id.toString());
   }
 
   setUserProfileImage(image) {
-    PrefManager().setUserProfileImage(image);
+    PrefManager.setUserProfileImage(image);
   }
 
   logOutUser() {
-    PrefManager().clearSharedPreferences();
+    PrefManager.clearSharedPreferences();
   }
 
   Future<void> updateTheme(bool theme) async {

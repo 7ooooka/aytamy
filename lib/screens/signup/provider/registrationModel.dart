@@ -81,18 +81,24 @@ class RegistrationModel {
         Map<String, dynamic> userData =
             await FacebookAuth.instance.getUserData();
         accessToken = accessToken;
-        signUpSocialUser(
-            social_type: "facebook",
-            social_token: accessToken.token,
-            social_id: userData['id'],
-            userName: userData['name'],
-            email: userData['email'],
-            imageUrl: userData['picture']['data']['url'].toString(),
-            onSuccess: onSucces,
-            onError: (error) {
-              onError(error.toString());
-              print("signUpUser onError ---->" + error.toString());
-            });
+        // signUpSocialUser(
+        //     social_type: "facebook",
+        //     social_token: accessToken.token,
+        //     social_id: userData['id'],
+        //     userName: userData['name'],
+        //     email: userData['email'],
+        //     imageUrl: userData['picture']['data']['url'].toString(),
+        //     onSuccess: onSucces,
+        //     onError: (error) {
+        //       onError(error.toString());
+        //       print("signUpUser onError ---->" + error.toString());
+        //     });
+        PrefManager.setUserId(userData['id'].toString());
+        PrefManager.setUserMail(userData['email']);
+        PrefManager.setUserName(userData['name']);
+        PrefManager.setUserToken(accessToken.token);
+        PrefManager.setUserProfileImage(userData['picture']['data']['url'].toString());
+        onSucces();
         // _saveSocialUserData(userData['id'], accessToken.token, userData['picture']['data']['url'].toString(), userData['email'], userData['name']);
         // onSucces(userData['picture']['data']['url'].toString());
       } else {
@@ -100,18 +106,24 @@ class RegistrationModel {
         print("FaceBook request ----> is Logged:::: ${(accessToken.toJson())}");
         Map<String, dynamic> userData =
             await FacebookAuth.instance.getUserData();
-        signUpSocialUser(
-            social_type: "facebook",
-            social_token: accessToken.token,
-            social_id: userData['id'],
-            userName: userData['name'],
-            email: userData['email'],
-            imageUrl: userData['picture']['data']['url'].toString(),
-            onSuccess: onSucces,
-            onError: (error) {
-              onError(error.toString());
-              print("signUpUser onError ---->" + error.toString());
-            });
+        // signUpSocialUser(
+        //     social_type: "facebook",
+        //     social_token: accessToken.token,
+        //     social_id: userData['id'],
+        //     userName: userData['name'],
+        //     email: userData['email'],
+        //     imageUrl: userData['picture']['data']['url'].toString(),
+        //     onSuccess: onSucces,
+        //     onError: (error) {
+        //       onError(error.toString());
+        //       print("signUpUser onError ---->" + error.toString());
+        //     });
+        PrefManager.setUserId(userData['id'].toString());
+        PrefManager.setUserMail(userData['email']);
+        PrefManager.setUserName(userData['name']);
+        PrefManager.setUserToken(accessToken.token);
+        PrefManager.setUserProfileImage(userData['picture']['data']['url'].toString());
+        onSucces();
         // _saveSocialUserData(userData['id'], accessToken.token, userData['picture']['data']['url'].toString(), userData['email'], userData['name']);
         // onSucces(userData['picture']['data']['url'].toString());
       }
@@ -249,7 +261,7 @@ class RegistrationModel {
           onError(error.toString());
           print("updateUserData onError ---->" + error.toString());
         },
-        uid: int.parse(PrefManager().getUserId()) ?? 7);
+        uid: int.parse(PrefManager.getUserId()) ?? 7);
   }
   updateUserwarranty({int warranty, onSuccess, onError}) {
     DIOManager().updateUserwarranty(
@@ -263,7 +275,7 @@ class RegistrationModel {
           onError(error.toString());
           print("updateUserData onError ---->" + error.toString());
         },
-        uid: int.parse(PrefManager().getUserId()) ?? 7);
+        uid: int.parse(PrefManager.getUserId()) ?? 7);
   }
 
   updateUserData(
@@ -281,20 +293,24 @@ class RegistrationModel {
     //   "job_id": jobId ?? PrefManager().getJobID(),
     //   "nationality_id": nationalityId ?? PrefManager().getNationalID()
     // };
-
-    var path = profileImagePath.path.toString();
-    var name = profileImagePath.path.split('/').last;
-
+    var path  = "";
+    var name = "";
+    if (profileImagePath?.path != null) {
+       path = profileImagePath.path.toString();
+       name = profileImagePath.path
+          .split('/')
+          .last;
+    }
     DIOManager().updateUserInfo(
-        uid: int.parse(PrefManager().getUserId()) ?? 7,
+        uid: int.parse(PrefManager.getUserId()) ?? 7,
         profileImgPath: path,
         profileImgName: name,
         type: 0,
-        dateBirth: birthDate ?? int.parse(PrefManager().getBirthDate()),
-        countryId: countryID ?? int.parse(PrefManager().getCountryID()),
-        jobId: jobId ?? int.parse(PrefManager().getJobID()),
+        dateBirth: birthDate ?? int.parse(PrefManager.getBirthDate()),
+        countryId: countryID ?? int.parse(PrefManager.getCountryID()),
+        jobId: jobId ?? int.parse(PrefManager.getJobID()),
         nationalityId:
-            nationalityId ?? int.parse(PrefManager().getNationalID()),
+            nationalityId ?? int.parse(PrefManager.getNationalID()),
         onSuccess: (response) {
           SignUpResponse signUpResponse = SignUpResponse.fromJson(response);
           _saveUserData(signUpResponse.data);
@@ -314,24 +330,24 @@ class RegistrationModel {
   }
 
   _saveUserData(User user) {
-    PrefManager().setUserId(user.id.toString());
-    PrefManager().setUserMail(user.email);
-    PrefManager().setUserName(user.name);
-    PrefManager().serUserType(user.type.toString());
-    PrefManager().setCityID(user.cityId.toString());
-    PrefManager().setCountryID(user.countryId.toString());
-    PrefManager().setDreamID(user.dreamId.toString());
-    PrefManager().setJobID(user.jobId.toString());
-    PrefManager().setEducationId(user.educationId.toString());
-    PrefManager().setEducationCertificate(user.educationCertificate.toString());
-    PrefManager().setNationalID(user.nationalityId.toString());
-    PrefManager().setPersonalID(user.personalId.toString());
-    PrefManager().serFatherCertificate(user.fatherCertificate.toString());
-    PrefManager().setMotherCertificate(user.motherCertificate.toString());
-    PrefManager().setParentMobile(user.parentMobile.toString());
-    PrefManager().setGender(user.gender.toString());
-    PrefManager().setDescription(user.description.toString());
-    PrefManager().setWhatsApp(user.whatsApp.toString());
-    PrefManager().setWarranty(user.warranty.toString());
+    PrefManager.setUserId(user.id.toString());
+    PrefManager.setUserMail(user.email);
+    PrefManager.setUserName(user.name);
+    PrefManager.serUserType(user.type.toString());
+    PrefManager.setCityID(user.cityId.toString());
+    PrefManager.setCountryID(user.countryId.toString());
+    PrefManager.setDreamID(user.dreamId.toString());
+    PrefManager.setJobID(user.jobId.toString());
+    PrefManager.setEducationId(user.educationId.toString());
+    PrefManager.setEducationCertificate(user.educationCertificate.toString());
+    PrefManager.setNationalID(user.nationalityId.toString());
+    PrefManager.setPersonalID(user.personalId.toString());
+    PrefManager.serFatherCertificate(user.fatherCertificate.toString());
+    PrefManager.setMotherCertificate(user.motherCertificate.toString());
+    PrefManager.setParentMobile(user.parentMobile.toString());
+    PrefManager.setGender(user.gender.toString());
+    PrefManager.setDescription(user.description.toString());
+    PrefManager.setWhatsApp(user.whatsApp.toString());
+    PrefManager.setWarranty(user.warranty.toString());
   }
 }

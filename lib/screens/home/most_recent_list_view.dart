@@ -1,8 +1,6 @@
-import 'package:aytamy/common/exception_indicators/empty_list_indicator.dart';
 import 'package:aytamy/common/model/User.dart';
 import 'package:aytamy/screens/home/provider/home_model.dart';
 import 'package:flutter/material.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 
 import 'case_item_view.dart';
@@ -18,7 +16,7 @@ class _MostRecentListViewState extends State<MostRecentListView> {
   User user;
   PageController _pagingController = new PageController(
     initialPage: 0,
-    viewportFraction: 0.75,
+    viewportFraction: .85,
   );
 
   @override
@@ -58,7 +56,8 @@ class _MostRecentListViewState extends State<MostRecentListView> {
                   SizedBox(
                     height: 10,
                   ),
-                  Expanded(
+                  Container(
+                    height: MediaQuery.of(context).size.height *.28,
                       child: renderMostRecentUsers(homeModel.mostRecentUsers)),
                   SizedBox(
                     height: 10,
@@ -73,23 +72,17 @@ class _MostRecentListViewState extends State<MostRecentListView> {
   }
 
   Widget renderMostRecentUsers(List<User> mostRecentUser) {
-    // if (mostRecentUser != null) {
-    //   if (mostRecentUser.isEmpty) {
-    //     _pagingController.itemList = [];
-    //   } else {
-    //     _pagingController.appendLastPage(mostRecentUser);
-    //     if (mostRecentUser!=null){
-    //       print(mostRecentUser.length.toString() + "lenghththth");
-    //     }
-    //   }
-    // }
+
     return PageView.builder(
         itemCount: mostRecentUser.length,
         controller: _pagingController,
+
         itemBuilder: (BuildContext context, int index) {
-          return
-            mostRecentUser!=null?
-            CaseItemView(index: index,):Text("Loading...");
+          return mostRecentUser != null
+              ? CaseItemView(
+                  index: index,
+                )
+              : Text("Loading...");
         },
         onPageChanged: (x) {
 /*    setState(() {
@@ -114,13 +107,13 @@ class _MostRecentListViewState extends State<MostRecentListView> {
         firstPageErrorIndicatorBuilder: (context) => EmptyListIndicator(),
         noItemsFoundIndicatorBuilder: (context) => EmptyListIndicator(),
       ),
-      padding: const EdgeInsets.all(12),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 1,
-        childAspectRatio: 2,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-      ),
+      // padding: const EdgeInsets.all(12),
+      // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      //   crossAxisCount: 1,
+      //   childAspectRatio: 2,
+      //   mainAxisSpacing: 10,
+      //   crossAxisSpacing: 10,
+      // ),
     );*/
 
     @override

@@ -1,14 +1,11 @@
 import 'package:aytamy/app/route.dart';
 import 'package:aytamy/common/colors.dart';
-import 'package:aytamy/common/providers/user_model.dart';
 import 'package:aytamy/common/stats_widgets.dart';
 import 'package:aytamy/generated/l10n.dart';
 import 'package:aytamy/screens/signup/provider/registrationModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../common/stats_widgets.dart';
 import '../../../common/stats_widgets.dart';
 
 class RegistrationInfoStepTwoScreen extends StatefulWidget {
